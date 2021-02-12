@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		922B480F21CB613E003C51A3 /* QTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922B480E21CB613E003C51A3 /* QTViewController.m */; };
 		922B481121D5A831003C51A3 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922B481021D5A831003C51A3 /* QTKit.framework */; };
 		922E8E7521BE509300552383 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7421BE509300552383 /* SearchController.m */; };
 		922E8E7821BF4CBD00552383 /* PublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7721BF4CBD00552383 /* PublishController.m */; };
@@ -24,7 +23,6 @@
 		9273337021E8195A001B1600 /* MHPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9273336E21E8195A001B1600 /* MHPlayerView.h */; };
 		9273337121E8195A001B1600 /* MHPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273336F21E8195A001B1600 /* MHPlayerView.m */; };
 		927A130C21C9F580007E88D9 /* SearchTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 927A130B21C9F580007E88D9 /* SearchTable.m */; };
-		928C5DDB21C241C50040F4C0 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C5DDA21C241C50040F4C0 /* SDAVAssetExportSession.m */; };
 		92C2CF2121B8D3CC00EABD49 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */; };
 		92C2CF2421B8D3CC00EABD49 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2321B8D3CC00EABD49 /* main.m */; };
 		92C2CF2921B8D3CC00EABD49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */; };
@@ -46,8 +44,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		922B480D21CB613E003C51A3 /* QTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTViewController.h; sourceTree = "<group>"; };
-		922B480E21CB613E003C51A3 /* QTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTViewController.m; sourceTree = "<group>"; };
 		922B481021D5A831003C51A3 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		922E8E7321BE509300552383 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
 		922E8E7421BE509300552383 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
@@ -68,12 +64,10 @@
 		922F5F6021BDE04E001FC1FF /* libcurl.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.4.dylib; path = ../../../../usr/lib/libcurl.4.dylib; sourceTree = "<group>"; };
 		922F5F6221BE1CC2001FC1FF /* DownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadController.h; sourceTree = "<group>"; };
 		922F5F6321BE1CC2001FC1FF /* DownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadController.m; sourceTree = "<group>"; };
-		9273336E21E8195A001B1600 /* MHPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPlayerView.h; sourceTree = "<group>"; };
-		9273336F21E8195A001B1600 /* MHPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPlayerView.m; sourceTree = "<group>"; };
+		9273336E21E8195A001B1600 /* MHPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPlayerView.h; path = ../MHPlayerView.h; sourceTree = "<group>"; };
+		9273336F21E8195A001B1600 /* MHPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPlayerView.m; path = ../MHPlayerView.m; sourceTree = "<group>"; };
 		927A130A21C9F580007E88D9 /* SearchTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTable.h; sourceTree = "<group>"; };
 		927A130B21C9F580007E88D9 /* SearchTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTable.m; sourceTree = "<group>"; };
-		928C5DD921C241C50040F4C0 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
-		928C5DDA21C241C50040F4C0 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
 		92C2CF1C21B8D3CC00EABD49 /* iHarris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iHarris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C2CF1F21B8D3CC00EABD49 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -114,8 +108,6 @@
 		92C2CF1321B8D3CA00EABD49 = {
 			isa = PBXGroup;
 			children = (
-				9273336E21E8195A001B1600 /* MHPlayerView.h */,
-				9273336F21E8195A001B1600 /* MHPlayerView.m */,
 				92C2CF1E21B8D3CC00EABD49 /* mHarris */,
 				92C2CF1D21B8D3CC00EABD49 /* Products */,
 				922F5F5A21B8D51A001FC1FF /* Frameworks */,
@@ -133,6 +125,8 @@
 		92C2CF1E21B8D3CC00EABD49 /* mHarris */ = {
 			isa = PBXGroup;
 			children = (
+				9273336E21E8195A001B1600 /* MHPlayerView.h */,
+				9273336F21E8195A001B1600 /* MHPlayerView.m */,
 				92C2CF1F21B8D3CC00EABD49 /* AppDelegate.h */,
 				92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */,
 				922E8E7621BF4CBD00552383 /* PublishController.h */,
@@ -145,8 +139,6 @@
 				92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */,
 				922E8E7921BF6E3600552383 /* PreviewController.h */,
 				922E8E7A21BF6E3600552383 /* PreviewController.m */,
-				928C5DD921C241C50040F4C0 /* SDAVAssetExportSession.h */,
-				928C5DDA21C241C50040F4C0 /* SDAVAssetExportSession.m */,
 				922F5F4D21B8D464001FC1FF /* BrowseActionListener.h */,
 				922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */,
 				922F5F4F21B8D464001FC1FF /* Harris.h */,
@@ -158,8 +150,6 @@
 				92C2CF2221B8D3CC00EABD49 /* Supporting Files */,
 				927A130A21C9F580007E88D9 /* SearchTable.h */,
 				927A130B21C9F580007E88D9 /* SearchTable.m */,
-				922B480D21CB613E003C51A3 /* QTViewController.h */,
-				922B480E21CB613E003C51A3 /* QTViewController.m */,
 			);
 			name = mHarris;
 			path = iHarris;
@@ -221,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92C2CF1721B8D3CA00EABD49 /* Build configuration list for PBXProject "iHarris" */;
+			buildConfigurationList = 92C2CF1721B8D3CA00EABD49 /* Build configuration list for PBXProject "mHarris" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -262,11 +252,9 @@
 				922F5F5721B8D464001FC1FF /* Harris.m in Sources */,
 				922E8E7B21BF6E3600552383 /* PreviewController.m in Sources */,
 				92C2CF2421B8D3CC00EABD49 /* main.m in Sources */,
-				928C5DDB21C241C50040F4C0 /* SDAVAssetExportSession.m in Sources */,
 				92C2CF2121B8D3CC00EABD49 /* AppDelegate.m in Sources */,
 				922F5F5621B8D464001FC1FF /* BrowseActionListener.m in Sources */,
 				927A130C21C9F580007E88D9 /* SearchTable.m in Sources */,
-				922B480F21CB613E003C51A3 /* QTViewController.m in Sources */,
 				922F5F6421BE1CC2001FC1FF /* DownloadController.m in Sources */,
 				922E8E7521BE509300552383 /* SearchController.m in Sources */,
 			);
@@ -384,7 +372,7 @@
 				);
 				INFOPLIST_FILE = iHarris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.iHarris;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.mHarris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.11;
 			};
@@ -401,7 +389,7 @@
 				);
 				INFOPLIST_FILE = iHarris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.iHarris;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.mHarris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.11;
 			};
@@ -410,7 +398,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92C2CF1721B8D3CA00EABD49 /* Build configuration list for PBXProject "iHarris" */ = {
+		92C2CF1721B8D3CA00EABD49 /* Build configuration list for PBXProject "mHarris" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C2CF2E21B8D3CC00EABD49 /* Debug */,

@@ -15,6 +15,7 @@
     IBOutlet NSTableView *searchTableView; // Search
     IBOutlet NSArrayController *searchResults;
     IBOutlet NSProgressIndicator *searchProgress;
+    IBOutlet NSButton *refreshButton;
     
     Harris *harris;
     NSUserDefaults *defaults;

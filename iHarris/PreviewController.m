@@ -61,7 +61,7 @@
         [(AVPlayerView *)mpView setShowsFrameSteppingButtons:YES];
         [abstractPlayerView addSubview:mpView];
         isQTMovie = NO;  // remove reliance on this setting
-       // [[[self view] window] makeFirstResponder:mpView];
+       [[[self view] window] makeFirstResponder:mpView];
         //[vp setNextResponder:abstractPlayerView];
 
     } else {
@@ -73,11 +73,12 @@
       //  [mpView setRefusesFirstResponder:YES];
         [abstractPlayerView addSubview:mpView];
         isQTMovie = YES;
-       // [[[self view] window] makeFirstResponder:mpView];
+       [[[self view] window] makeFirstResponder:self];
        // [vp setNextResponder:abstractPlayerView];
+        //[[[self view] window] makeFirstResponder:abstractPlayerView];
+
     }
     
-    [[[self view] window] makeFirstResponder:abstractPlayerView];
     
     [abstractPlayerView setNeedsDisplay:YES];
     
@@ -120,10 +121,19 @@
 
 - (void)viewWillDisappear{
     if (!isQTMovie)
+    {
         [playerItem removeObserver:self forKeyPath:@"status"];
+        [player pause];
+        player=nil;
+        [asset cancelLoading];
+        asset=nil;
+    } else {
+        [qtMovie invalidate];
+        qtMovie=nil;
+    }
     for (NSView *ns in [abstractPlayerView subviews])
         [ns removeFromSuperview];
-    [player pause];
+    
 }
 
 
@@ -220,6 +230,8 @@
     asset = [AVAsset assetWithURL:url];
     playerItem = [AVPlayerItem playerItemWithAsset:asset];
     
+    NSLog(@"sometimes the playerItem doesnt -> %@\n",playerItem);
+    
     // I seriously don't know what this is for apart from telling
     // if the observer call back is from us.
     PlayerItemContext = [NSObject alloc];
@@ -272,8 +284,10 @@
     [playerView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 
     // read timecode
+    // an exercise in futility, AVFoundation doesn't support SMPTE timecodes
     
     NSError *error;
+	long timeStampFrame = 0;
     AVAssetReader *aReader = [[AVAssetReader alloc] initWithAsset:asset error:&error ];
     if (aReader != nil)
     {
@@ -289,6 +303,19 @@
                 CMSampleBufferRef sBuf = NULL;
                 while (sBuf = [tcOut copyNextSampleBuffer])
                 {
+                    CMBlockBufferRef bBuf = CMSampleBufferGetDataBuffer(sBuf);
+                    size_t length = CMBlockBufferGetDataLength(bBuf);
+                    if (length>0) {
+                        unsigned char *buffer = malloc(length);
+                        memset(buffer, 0, length);
+                        CMBlockBufferCopyDataBytes(bBuf, 0, length, buffer);
+
+                        for (int i=0; i<length; i++) {
+                            timeStampFrame = (timeStampFrame << 8) + buffer[i];
+                        }
+
+                        free(buffer);
+                    }
                     NSLog(@"sbuf: %@", sBuf);
                 }
                 if (sBuf)
@@ -297,6 +324,8 @@
             
         }
     }
+
+	NSLog(@"Timestame frame: %ld\n",timeStampFrame);
     
     return playerView;
     
@@ -522,6 +551,8 @@
 
 - (void)keyDown:(NSEvent *)event
 {
+    if (event != nil)
+    {
   // NSLog(@"[PreviewController keyDown:%@]",event);
     NSString *key = [event characters];
     if ([key isEqualToString:@"i"])
@@ -569,9 +600,10 @@
             [self->outTimeCodeText setTitle:[self stringFromCMTime:[playerItem forwardPlaybackEndTime]]];
         }
     } else {
-        // if (isQTMovie)
-           // [abstractPlayerView keyDown:event];
-        [mpView keyDown:event];
+         if (isQTMovie)
+             [mpView keyDown:event];  // sending this to AVMovieView causes an event loop
+
+    }
     }
 // else should I call super now?
 }

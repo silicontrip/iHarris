@@ -27,11 +27,11 @@
 {
 
     dbList = [defaults arrayForKey:@"DbIps"];
-    [self setDBServer:0];
+    [self setDBServer:0]; // needs to be configurable
     
 	dbConnection = [[PGSQLConnection alloc] init];
     
-    //NSLog(@"Connection: %@:%@:%@",dbServer,dbUser,dbPass);
+    NSLog(@"Connection: %@",dbServer);
     
     [dbConnection setServer:dbServer];
     [dbConnection setPort:@"5432"];
@@ -55,6 +55,7 @@
 - (void)closeDb
 {
     [dbConnection close];
+  //  [dbConnection dealloc];
     dbConnection = nil;
 }
 
@@ -85,37 +86,28 @@
 	return nil;
 }
 
--(NSArray *)listFiles
-{
-	return [self listFilesMatching:@"%"];
-}
 
--(NSArray *)listFilesMatching:(NSString *)s
+- (NSArray *)executeQuery:(NSString *) query
 {
-    
-    // this needs to be in a second thread
-	if (dbConnection == nil)
+    if (dbConnection == nil)
         if (![self openDb])
             return nil;
     
-	PGSQLRecordset *rs = nil;
-	
-	NSString *qs = [dbConnection sqlEncodeString:s];  // hoping this protects from sql exploits
-	NSString *query = [NSString stringWithFormat:@"select %@ FROM clips where umid!='' and longnameid like '%@' and not longnameid like 'MLT%%'",columns,qs];
-	
-	NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:0];
-	
-	rs = [dbConnection open:query];
-	if (rs != nil)
-	{
-		// NSInteger rowCount = [rs recordCount];
-		NSArray *col = [rs columns];
-		
-		while (![rs isEOF])
-		{
-			NSMutableArray *rowResults = [[NSMutableArray alloc] initWithCapacity:0];
+    PGSQLRecordset *rs = nil;
 
-			for (long i =0; i< [col count]; i++)
+    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    rs = [dbConnection open:query];
+    if (rs != nil)
+    {
+        // NSInteger rowCount = [rs recordCount];
+        NSArray *col = [rs columns];
+        
+        while (![rs isEOF])
+        {
+            NSMutableArray *rowResults = [[NSMutableArray alloc] initWithCapacity:0];
+            
+            for (long i =0; i< [col count]; i++)
             {
                 NSString *field =[[rs fieldByIndex:i] asString];
                 // conditional field formatting.
@@ -128,18 +120,36 @@
                     //NSLog(@"timestamp Formatter");
                     field = [self timeFormatter:field];
                 }
-
                 
                 
-				 [rowResults addObject:field] ;
+                
+                [rowResults addObject:field] ;
             }
-			[results addObject:[rowResults copy]];
-			[rs moveNext];
-		}
-		
-	}
+            [results addObject:[rowResults copy]];
+            [rs moveNext];
+        }
+        
+    }
+    [rs close];
     [self closeDb];
-	return [results copy];
+    return [results copy];
+}
+
+-(NSArray *)listFiles
+{
+    // copy of listFilesMatching but with different query.
+    NSString *query = [NSString stringWithFormat:@"select %@ FROM clips where umid!='' and not longnameid like 'MLT%%'",columns];
+    return [self executeQuery:query];
+
+}
+
+-(NSArray *)listFilesMatching:(NSString *)s
+{
+    
+    NSString *qs = [dbConnection sqlEncodeString:s];  // hoping this protects from sql exploits
+    NSString *query = [NSString stringWithFormat:@"select %@ FROM clips where umid!='' and longnameid like '%@' and not longnameid like 'MLT%%'",columns,qs];
+    
+    return [self executeQuery:query];
 }
 
 - (NSString *)durationFormatter:(NSString *)frameString
@@ -207,84 +217,10 @@
 
 -(void)setDBServer:(NSInteger)i
 {
-    if ([dbList count] > 0)
+    if ([dbList count] >= i)
         dbServer = [dbList objectAtIndex:i];
 }
 
-// considering moving all the ftp code into the controller classes
-/*
--(void)setFtpServer:(NSInteger)i
-{
-    mgxList = [defaults objectForKey:@"MgxIps"];
-    
-    if ([mgxList count] > 0)
-    {
-        NSString *url = [NSString stringWithFormat:@"ftp://%@:%@@%@:2098/",[defaults stringForKey:@"MgxUsername"],[defaults stringForKey:@"MgxPassword"],[mgxList objectAtIndex:i]];
-        ftpServer = [NSURL URLWithString:url];
-    }
-}
+// all ftp moved to Download/Publish Controller
 
--(BOOL)getFileName:(NSString *)name
-{
-	//NSFileHandle *fh = [NSFileHandle fileHandleForWritingAtPath:name];
-	return [self getFileName:name target:name];
-}
-*/
-
-// move to Download Controller
-// hmmm mixing C and obj-c
-static size_t my_fwrite(void *buffer, size_t size, size_t nmemb, void *stream)
-{
-    struct FtpFile *out = (struct FtpFile *)stream;
-    if(out && !out->stream) {
-        /* open file for writing */
-        NSLog(@"my_fwrite callback opening file: %s\n",out->filename);
-        out->stream = fopen(out->filename, "wb");
-        if(!out->stream)
-            return -1; /* failure, can't open file to write */
-    }
-  //  NSLog(@"my_fwrite callback writing data: %zu x %zu\n",size,nmemb);
-    size_t bw = fwrite(buffer, size, nmemb, out->stream);
-  //  NSLog(@"bytes written: %zu\n",bw);
-    return bw;
-}
-
--(BOOL)getFileName:(NSString *)name target:(NSString *)target
-{
-	CURL *curl;
-    CURLcode res;
-    struct FtpFile ftpfile = {
-        [target UTF8String], /* name to store the file as if successful */
-        NULL
-    };
-    curl = curl_easy_init();
-    if(curl) {
-        NSLog(@"FTP Server %@",[[ftpServer absoluteString] stringByAppendingString:name]);
-        curl_easy_setopt(curl, CURLOPT_URL, [[[ftpServer absoluteString] stringByAppendingString:name] UTF8String]);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, my_fwrite);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &ftpfile);
-        curl_easy_setopt(curl, CURLOPT_FTP_USE_EPSV,0L); // because harris doesn't support EPSV only PASV
-       // curl_easy_setopt(curl, CURLOPT_NOBODY,1L); // do not perform dir list (yeah but dont download file either)
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L); // for debugging only.
-        NSLog(@"curl_easy_perform\n");
-        res = curl_easy_perform(curl);
-        curl_easy_cleanup(curl);
-        NSLog(@"curl response: %d\n", res);
-
-        // 18 is expected because MGX isn't a real ftp server
-        if(CURLE_OK != res) {
-            /* we failed */
-            fprintf(stderr, "curl told us %d\n", res);
-            if(ftpfile.stream)
-                fclose(ftpfile.stream);
-            return NO;
-        }
-    }
-    if(ftpfile.stream)
-        fclose(ftpfile.stream); /* close the local file */
-    
-    curl_global_cleanup();
-    
-    return YES;
-}
 @end

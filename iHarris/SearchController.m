@@ -42,8 +42,10 @@
     harris = [ad getHarris];
     defaults = [ad getDefaults];
     
+    /*
     if ([[searchResults arrangedObjects] count]==0)
         [self refresh:nil];
+     */
 }
 
 - (IBAction)selectSearch:(id)sender {
@@ -72,6 +74,7 @@
     [searchProgress setUsesThreadedAnimation:YES];
     [searchProgress setIndeterminate:YES];
     [searchProgress startAnimation:nil];
+    [refreshButton setEnabled:NO];
     
         NSArray<NSString *> *colNames = [harris listColumns];
 
@@ -147,6 +150,7 @@
           //  NSLog(@"stop animation");
             [searchProgress setHidden:YES];
             [searchProgress stopAnimation:nil];
+            [refreshButton setEnabled:YES];
 
        });
       //  [searchProgress stopAnimation:nil];
