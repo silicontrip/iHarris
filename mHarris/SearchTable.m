@@ -25,7 +25,7 @@
     NSPasteboardItem *pbItem = [NSPasteboardItem new];
     [pbItem setDataProvider:self forTypes:[NSArray arrayWithObjects:NSPasteboardTypeString, nil]];
     NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:pbItem];
-    NSRect draggingRect = self.bounds;
+  //  NSRect draggingRect = self.bounds;
   // [dragItem setDraggingFrame:draggingRect contents:[self image]];
     NSDraggingSession *draggingSession = [self beginDraggingSessionWithItems:[NSArray arrayWithObject:dragItem] event:event source:self];
     draggingSession.animatesToStartingPositionsOnCancelOrFail = YES;
@@ -70,14 +70,20 @@
      */
     
 }
-
+/*
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal {
+{
     NSLog(@"draggingSourceOperationMaskForLocal");
+    NSLog(@"dragging session: %@",session);
+    NSLog(@"dragging context: %@",context);
 
-    if (isLocal) return NSDragOperationNone;
-        else return NSDragOperationCopy;
+    
+    
+//    if (isLocal) return NSDragOperationNone;
+  //      else return NSDragOperationCopy;
 }
-
+*/
+ /*
 - (BOOL)tableView:(NSTableView *)tv writeRows:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
 {
     NSLog(@"writeRows");
@@ -90,7 +96,7 @@
     [pboard setPropertyList:dragfiles forType: NSFilenamesPboardType];
     return YES;
 }
-
+*/
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     NSLog(@"writeRowsWithIndexes");
     [pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];

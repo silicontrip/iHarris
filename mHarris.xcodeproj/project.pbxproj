@@ -7,86 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		922B481121D5A831003C51A3 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922B481021D5A831003C51A3 /* QTKit.framework */; };
-		922E8E7521BE509300552383 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7421BE509300552383 /* SearchController.m */; };
-		922E8E7821BF4CBD00552383 /* PublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7721BF4CBD00552383 /* PublishController.m */; };
-		922E8E7B21BF6E3600552383 /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7A21BF6E3600552383 /* PreviewController.m */; };
-		922E8E7D21BF6EDB00552383 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922E8E7C21BF6EDB00552383 /* AVKit.framework */; };
-		922E8E7F21BF72C600552383 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922E8E7E21BF72C600552383 /* AVFoundation.framework */; };
-		922E8E8121BF88E800552383 /* PGSQLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922F5F5B21B8D51A001FC1FF /* PGSQLKit.framework */; };
-		922E8E8421BF89D000552383 /* PGSQLKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 922F5F5B21B8D51A001FC1FF /* PGSQLKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		922F5F5621B8D464001FC1FF /* BrowseActionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */; };
-		922F5F5721B8D464001FC1FF /* Harris.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5021B8D464001FC1FF /* Harris.m */; };
-		922F5F5821B8D464001FC1FF /* HarrisPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */; };
-		922F5F6121BDE04E001FC1FF /* libcurl.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 922F5F6021BDE04E001FC1FF /* libcurl.4.dylib */; };
-		922F5F6421BE1CC2001FC1FF /* DownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F6321BE1CC2001FC1FF /* DownloadController.m */; };
-		9273337021E8195A001B1600 /* MHPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9273336E21E8195A001B1600 /* MHPlayerView.h */; };
-		9273337121E8195A001B1600 /* MHPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273336F21E8195A001B1600 /* MHPlayerView.m */; };
-		927A130C21C9F580007E88D9 /* SearchTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 927A130B21C9F580007E88D9 /* SearchTable.m */; };
-		92C2CF2121B8D3CC00EABD49 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */; };
-		92C2CF2421B8D3CC00EABD49 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2321B8D3CC00EABD49 /* main.m */; };
-		92C2CF2921B8D3CC00EABD49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */; };
-		92C2CF2C21B8D3CC00EABD49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */; };
+		4D23207E25D79F92002F27C3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D23207C25D79F92002F27C3 /* MainMenu.xib */; };
+		4D23208725D79FA0002F27C3 /* PublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7721BF4CBD00552383 /* PublishController.m */; };
+		4D23208825D79FD7002F27C3 /* DownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F6321BE1CC2001FC1FF /* DownloadController.m */; };
+		4D23208925D7A00A002F27C3 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7421BE509300552383 /* SearchController.m */; };
+		4D23208A25D7A00A002F27C3 /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7A21BF6E3600552383 /* PreviewController.m */; };
+		4D23208B25D7A00A002F27C3 /* BrowseActionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */; };
+		4D23208C25D7A00A002F27C3 /* Harris.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5021B8D464001FC1FF /* Harris.m */; };
+		4D23208D25D7A00A002F27C3 /* HarrisPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */; };
+		4D23208E25D7A00A002F27C3 /* SearchTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 927A130B21C9F580007E88D9 /* SearchTable.m */; };
+		4D23209025D7A028002F27C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */; };
+		4D23209125D7A02B002F27C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */; };
+		4D3E21F525D7ACBC005A3815 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */; };
+		4D3E21F625D7ACFC005A3815 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2321B8D3CC00EABD49 /* main.m */; };
+		4DC667F525D7A4630030A8C4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC667F425D7A4630030A8C4 /* QTKit.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		922E8E8321BF88E800552383 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				922E8E8421BF89D000552383 /* PGSQLKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		922B481021D5A831003C51A3 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
-		922E8E7321BE509300552383 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
-		922E8E7421BE509300552383 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
-		922E8E7621BF4CBD00552383 /* PublishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishController.h; sourceTree = "<group>"; };
-		922E8E7721BF4CBD00552383 /* PublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishController.m; sourceTree = "<group>"; };
-		922E8E7921BF6E3600552383 /* PreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewController.h; sourceTree = "<group>"; };
-		922E8E7A21BF6E3600552383 /* PreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewController.m; sourceTree = "<group>"; };
-		922E8E7C21BF6EDB00552383 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
-		922E8E7E21BF72C600552383 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		922F5F4D21B8D464001FC1FF /* BrowseActionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseActionListener.h; sourceTree = "<group>"; };
-		922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseActionListener.m; sourceTree = "<group>"; };
-		922F5F4F21B8D464001FC1FF /* Harris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harris.h; sourceTree = "<group>"; };
-		922F5F5021B8D464001FC1FF /* Harris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harris.m; sourceTree = "<group>"; };
-		922F5F5121B8D464001FC1FF /* HarrisPrefsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HarrisPrefsController.h; sourceTree = "<group>"; };
-		922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HarrisPrefsController.m; sourceTree = "<group>"; };
-		922F5F5321B8D464001FC1FF /* iHarris.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = iHarris.entitlements; sourceTree = "<group>"; };
-		922F5F5B21B8D51A001FC1FF /* PGSQLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PGSQLKit.framework; path = ../../../../Library/Frameworks/PGSQLKit.framework; sourceTree = "<group>"; };
-		922F5F6021BDE04E001FC1FF /* libcurl.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.4.dylib; path = ../../../../usr/lib/libcurl.4.dylib; sourceTree = "<group>"; };
-		922F5F6221BE1CC2001FC1FF /* DownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadController.h; sourceTree = "<group>"; };
-		922F5F6321BE1CC2001FC1FF /* DownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadController.m; sourceTree = "<group>"; };
-		9273336E21E8195A001B1600 /* MHPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPlayerView.h; path = ../MHPlayerView.h; sourceTree = "<group>"; };
-		9273336F21E8195A001B1600 /* MHPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPlayerView.m; path = ../MHPlayerView.m; sourceTree = "<group>"; };
-		927A130A21C9F580007E88D9 /* SearchTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTable.h; sourceTree = "<group>"; };
-		927A130B21C9F580007E88D9 /* SearchTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTable.m; sourceTree = "<group>"; };
-		92C2CF1C21B8D3CC00EABD49 /* iHarris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iHarris.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		92C2CF1F21B8D3CC00EABD49 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		92C2CF2321B8D3CC00EABD49 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4D23207125D799A5002F27C3 /* mHarris.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = mHarris.app; path = DerivedData/mHarris/Build/Products/Release/mHarris.app; sourceTree = "<group>"; };
+		4D23207725D79F92002F27C3 /* mHarris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mHarris.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D23207D25D79F92002F27C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4DC667F425D7A4630030A8C4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/QTKit.framework; sourceTree = DEVELOPER_DIR; };
+		922E8E7321BE509300552383 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchController.h; path = mHarris/SearchController.h; sourceTree = "<group>"; };
+		922E8E7421BE509300552383 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchController.m; path = mHarris/SearchController.m; sourceTree = "<group>"; };
+		922E8E7621BF4CBD00552383 /* PublishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishController.h; path = mHarris/PublishController.h; sourceTree = "<group>"; };
+		922E8E7721BF4CBD00552383 /* PublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishController.m; path = mHarris/PublishController.m; sourceTree = "<group>"; };
+		922E8E7921BF6E3600552383 /* PreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewController.h; path = mHarris/PreviewController.h; sourceTree = "<group>"; };
+		922E8E7A21BF6E3600552383 /* PreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewController.m; path = mHarris/PreviewController.m; sourceTree = "<group>"; };
+		922F5F4D21B8D464001FC1FF /* BrowseActionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowseActionListener.h; path = mHarris/BrowseActionListener.h; sourceTree = "<group>"; };
+		922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowseActionListener.m; path = mHarris/BrowseActionListener.m; sourceTree = "<group>"; };
+		922F5F4F21B8D464001FC1FF /* Harris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Harris.h; path = mHarris/Harris.h; sourceTree = "<group>"; };
+		922F5F5021B8D464001FC1FF /* Harris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Harris.m; path = mHarris/Harris.m; sourceTree = "<group>"; };
+		922F5F5121B8D464001FC1FF /* HarrisPrefsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HarrisPrefsController.h; path = mHarris/HarrisPrefsController.h; sourceTree = "<group>"; };
+		922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HarrisPrefsController.m; path = mHarris/HarrisPrefsController.m; sourceTree = "<group>"; };
+		922F5F5321B8D464001FC1FF /* mHarris.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = mHarris.entitlements; path = mHarris/mHarris.entitlements; sourceTree = "<group>"; };
+		922F5F6221BE1CC2001FC1FF /* DownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloadController.h; path = mHarris/DownloadController.h; sourceTree = "<group>"; };
+		922F5F6321BE1CC2001FC1FF /* DownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloadController.m; path = mHarris/DownloadController.m; sourceTree = "<group>"; };
+		9273336E21E8195A001B1600 /* MHPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPlayerView.h; sourceTree = "<group>"; };
+		9273336F21E8195A001B1600 /* MHPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPlayerView.m; sourceTree = "<group>"; };
+		927A130A21C9F580007E88D9 /* SearchTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchTable.h; path = mHarris/SearchTable.h; sourceTree = "<group>"; };
+		927A130B21C9F580007E88D9 /* SearchTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchTable.m; path = mHarris/SearchTable.m; sourceTree = "<group>"; };
+		92C2CF1F21B8D3CC00EABD49 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = mHarris/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = mHarris/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		92C2CF2321B8D3CC00EABD49 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = mHarris/main.m; sourceTree = "<group>"; };
+		92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = mHarris/Assets.xcassets; sourceTree = "<group>"; };
 		92C2CF2B21B8D3CC00EABD49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		92C2CF2D21B8D3CC00EABD49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92C2CF2D21B8D3CC00EABD49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = mHarris/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		92C2CF1921B8D3CA00EABD49 /* Frameworks */ = {
+		4D23207425D79F92002F27C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				922B481121D5A831003C51A3 /* QTKit.framework in Frameworks */,
-				922E8E7F21BF72C600552383 /* AVFoundation.framework in Frameworks */,
-				922E8E7D21BF6EDB00552383 /* AVKit.framework in Frameworks */,
-				922F5F6121BDE04E001FC1FF /* libcurl.4.dylib in Frameworks */,
-				922E8E8121BF88E800552383 /* PGSQLKit.framework in Frameworks */,
+				4DC667F525D7A4630030A8C4 /* QTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,18 +70,15 @@
 		922F5F5A21B8D51A001FC1FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				922B481021D5A831003C51A3 /* QTKit.framework */,
-				922E8E7E21BF72C600552383 /* AVFoundation.framework */,
-				922E8E7C21BF6EDB00552383 /* AVKit.framework */,
-				922F5F6021BDE04E001FC1FF /* libcurl.4.dylib */,
-				922F5F5B21B8D51A001FC1FF /* PGSQLKit.framework */,
+				4DC667F425D7A4630030A8C4 /* QTKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		92C2CF1321B8D3CA00EABD49 = {
 			isa = PBXGroup;
 			children = (
+				4D23207125D799A5002F27C3 /* mHarris.app */,
 				92C2CF1E21B8D3CC00EABD49 /* mHarris */,
 				92C2CF1D21B8D3CC00EABD49 /* Products */,
 				922F5F5A21B8D51A001FC1FF /* Frameworks */,
@@ -117,7 +88,7 @@
 		92C2CF1D21B8D3CC00EABD49 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92C2CF1C21B8D3CC00EABD49 /* iHarris.app */,
+				4D23207725D79F92002F27C3 /* mHarris.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +96,7 @@
 		92C2CF1E21B8D3CC00EABD49 /* mHarris */ = {
 			isa = PBXGroup;
 			children = (
+				92C2CF2321B8D3CC00EABD49 /* main.m */,
 				9273336E21E8195A001B1600 /* MHPlayerView.h */,
 				9273336F21E8195A001B1600 /* MHPlayerView.m */,
 				92C2CF1F21B8D3CC00EABD49 /* AppDelegate.h */,
@@ -136,6 +108,7 @@
 				922E8E7321BE509300552383 /* SearchController.h */,
 				922E8E7421BE509300552383 /* SearchController.m */,
 				92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */,
+				4D23207C25D79F92002F27C3 /* MainMenu.xib */,
 				92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */,
 				922E8E7921BF6E3600552383 /* PreviewController.h */,
 				922E8E7A21BF6E3600552383 /* PreviewController.m */,
@@ -145,55 +118,32 @@
 				922F5F5021B8D464001FC1FF /* Harris.m */,
 				922F5F5121B8D464001FC1FF /* HarrisPrefsController.h */,
 				922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */,
-				922F5F5321B8D464001FC1FF /* iHarris.entitlements */,
+				922F5F5321B8D464001FC1FF /* mHarris.entitlements */,
 				92C2CF2D21B8D3CC00EABD49 /* Info.plist */,
-				92C2CF2221B8D3CC00EABD49 /* Supporting Files */,
 				927A130A21C9F580007E88D9 /* SearchTable.h */,
 				927A130B21C9F580007E88D9 /* SearchTable.m */,
 			);
 			name = mHarris;
-			path = iHarris;
-			sourceTree = "<group>";
-		};
-		92C2CF2221B8D3CC00EABD49 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				92C2CF2321B8D3CC00EABD49 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		922B481221D5AA6C003C51A3 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9273337021E8195A001B1600 /* MHPlayerView.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		92C2CF1B21B8D3CA00EABD49 /* iHarris */ = {
+		4D23207625D79F92002F27C3 /* mHarris */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92C2CF3021B8D3CC00EABD49 /* Build configuration list for PBXNativeTarget "iHarris" */;
+			buildConfigurationList = 4D23208325D79F92002F27C3 /* Build configuration list for PBXNativeTarget "mHarris" */;
 			buildPhases = (
-				92C2CF1821B8D3CA00EABD49 /* Sources */,
-				92C2CF1921B8D3CA00EABD49 /* Frameworks */,
-				92C2CF1A21B8D3CA00EABD49 /* Resources */,
-				922E8E8321BF88E800552383 /* Embed Frameworks */,
-				922B481221D5AA6C003C51A3 /* Headers */,
+				4D23207325D79F92002F27C3 /* Sources */,
+				4D23207425D79F92002F27C3 /* Frameworks */,
+				4D23207525D79F92002F27C3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = iHarris;
-			productName = iHarris;
-			productReference = 92C2CF1C21B8D3CC00EABD49 /* iHarris.app */;
+			name = mHarris;
+			productName = mHarris;
+			productReference = 4D23207725D79F92002F27C3 /* mHarris.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -202,11 +152,11 @@
 		92C2CF1421B8D3CA00EABD49 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = "Client Administrator";
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = nine;
 				TargetAttributes = {
-					92C2CF1B21B8D3CA00EABD49 = {
-						CreatedOnToolsVersion = 8.2;
+					4D23207625D79F92002F27C3 = {
+						CreatedOnToolsVersion = 10.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -224,45 +174,54 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92C2CF1B21B8D3CA00EABD49 /* iHarris */,
+				4D23207625D79F92002F27C3 /* mHarris */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		92C2CF1A21B8D3CA00EABD49 /* Resources */ = {
+		4D23207525D79F92002F27C3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92C2CF2921B8D3CC00EABD49 /* Assets.xcassets in Resources */,
-				92C2CF2C21B8D3CC00EABD49 /* Main.storyboard in Resources */,
+				4D23207E25D79F92002F27C3 /* MainMenu.xib in Resources */,
+				4D23209125D7A02B002F27C3 /* Assets.xcassets in Resources */,
+				4D23209025D7A028002F27C3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		92C2CF1821B8D3CA00EABD49 /* Sources */ = {
+		4D23207325D79F92002F27C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				922E8E7821BF4CBD00552383 /* PublishController.m in Sources */,
-				922F5F5821B8D464001FC1FF /* HarrisPrefsController.m in Sources */,
-				9273337121E8195A001B1600 /* MHPlayerView.m in Sources */,
-				922F5F5721B8D464001FC1FF /* Harris.m in Sources */,
-				922E8E7B21BF6E3600552383 /* PreviewController.m in Sources */,
-				92C2CF2421B8D3CC00EABD49 /* main.m in Sources */,
-				92C2CF2121B8D3CC00EABD49 /* AppDelegate.m in Sources */,
-				922F5F5621B8D464001FC1FF /* BrowseActionListener.m in Sources */,
-				927A130C21C9F580007E88D9 /* SearchTable.m in Sources */,
-				922F5F6421BE1CC2001FC1FF /* DownloadController.m in Sources */,
-				922E8E7521BE509300552383 /* SearchController.m in Sources */,
+				4D23208725D79FA0002F27C3 /* PublishController.m in Sources */,
+				4D23208D25D7A00A002F27C3 /* HarrisPrefsController.m in Sources */,
+				4D23208A25D7A00A002F27C3 /* PreviewController.m in Sources */,
+				4D23208C25D7A00A002F27C3 /* Harris.m in Sources */,
+				4D23208925D7A00A002F27C3 /* SearchController.m in Sources */,
+				4D23208E25D7A00A002F27C3 /* SearchTable.m in Sources */,
+				4D3E21F525D7ACBC005A3815 /* AppDelegate.m in Sources */,
+				4D23208825D79FD7002F27C3 /* DownloadController.m in Sources */,
+				4D3E21F625D7ACFC005A3815 /* main.m in Sources */,
+				4D23208B25D7A00A002F27C3 /* BrowseActionListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4D23207C25D79F92002F27C3 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D23207D25D79F92002F27C3 /* Base */,
+			);
+			name = MainMenu.xib;
+			path = mHarris;
+			sourceTree = "<group>";
+		};
 		92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -274,24 +233,85 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4D23208425D79F92002F27C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = mHarris.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				"HEADER_SEARCH_PATHS[arch=*]" = /Library/Frameworks/QTKit.framework/Versions/A/Headers;
+				INFOPLIST_FILE = mHarris/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.mHarris;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.11;
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		4D23208525D79F92002F27C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = mHarris.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				"HEADER_SEARCH_PATHS[arch=*]" = /Library/Frameworks/QTKit.framework/Versions/A/Headers;
+				INFOPLIST_FILE = mHarris/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.mHarris;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.11;
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
 		92C2CF2E21B8D3CC00EABD49 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ADDITIONAL_SDKS[arch=*]" = "";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES[arch=*]" = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -300,6 +320,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /Library/Frameworks/;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -314,31 +335,44 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				"SYSTEM_FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 			};
 			name = Debug;
 		};
 		92C2CF2F21B8D3CC00EABD49 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ADDITIONAL_SDKS[arch=*]" = "";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				"CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES[arch=*]" = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -347,6 +381,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /Library/Frameworks/;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -355,63 +390,31 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		92C2CF3121B8D3CC00EABD49 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-				);
-				INFOPLIST_FILE = iHarris/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.mHarris;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.11;
-			};
-			name = Debug;
-		};
-		92C2CF3221B8D3CC00EABD49 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-				);
-				INFOPLIST_FILE = iHarris/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.mHarris;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.11;
+				"SYSTEM_FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4D23208325D79F92002F27C3 /* Build configuration list for PBXNativeTarget "mHarris" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D23208425D79F92002F27C3 /* Debug */,
+				4D23208525D79F92002F27C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		92C2CF1721B8D3CA00EABD49 /* Build configuration list for PBXProject "mHarris" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C2CF2E21B8D3CC00EABD49 /* Debug */,
 				92C2CF2F21B8D3CC00EABD49 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		92C2CF3021B8D3CC00EABD49 /* Build configuration list for PBXNativeTarget "iHarris" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				92C2CF3121B8D3CC00EABD49 /* Debug */,
-				92C2CF3221B8D3CC00EABD49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

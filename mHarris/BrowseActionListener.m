@@ -44,7 +44,8 @@
 	
 	[open setTitle:title];
 	
-	if ([open runModal] == NSFileHandlingPanelOKButton)
+  //  if ([open runModal] == NSFileHandlingPanelOKButton)
+	if ([open runModal] == 1)
 	{
 		// highlander pattern, there really is only 1
 		for (NSURL *URL in [open URLs])

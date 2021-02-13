@@ -77,7 +77,7 @@ static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
             curl_easy_setopt(curl, CURLOPT_INFILESIZE, fileSize);
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [readFile open];
+                [self->readFile open];
                 CURLcode res = curl_easy_perform(curl);  // Blocks at this point while ftp transfers
                 if(res != CURLE_OK)
                     NSLog(@"curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
@@ -86,9 +86,9 @@ static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
                 
                 /* always cleanup */ 
                 curl_easy_cleanup(curl);
-                [readFile close];
+                [self->readFile close];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [progress setHidden:YES];
+                    [self->progress setHidden:YES];
                 });
             });
         

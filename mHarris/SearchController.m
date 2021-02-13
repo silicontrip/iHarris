@@ -22,6 +22,7 @@
     
     AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     
+    // user settings
     columnWidthDefaults = @{
                             @"longnameid": @250,
                             @"modifiedtimestamp": @150,
@@ -54,17 +55,22 @@
     if ([searchTable selectedRow] >= 0)
     {
         // show me the row,
-        NSDictionary *row = [[searchResults arrangedObjects] objectAtIndex:[searchTable selectedRow]];
+        
+        NSArray* searchArranged = [searchResults arrangedObjects];
+        
+        NSDictionary *row = [searchArranged objectAtIndex:[searchTable selectedRow]];
         [defaults setObject:[row objectForKey:@"longnameid"] forKey:@"selected clip"];
         [defaults setObject:[row objectForKey:@"videoformatstring"] forKey:@"selected format"];
 
     }
 }
 
+/*
 - (void)tableViewColumnDidResize:(NSNotification *)notification
 {
     NSLog(@"tableview column did resize");
 }
+*/
 
 - (IBAction)beginDrag:(id)sender {
 }

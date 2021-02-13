@@ -55,7 +55,7 @@
 - (void)closeDb
 {
     [dbConnection close];
-  //  [dbConnection dealloc];
+  //  [dbConnection release];
     dbConnection = nil;
 }
 
@@ -68,10 +68,12 @@
 		if (![self openDb])
             return nil;
 
-	PGSQLRecordset *rs = nil;
+	// PGSQLRecordset *rs = nil;
 	NSString *query = [NSString stringWithFormat:@"select %@ FROM clips limit 1",columns];
     
    // NSLog(@"query: %@",query);
+    
+    id<GenDBRecordset> rs = nil;
     
 	rs = [dbConnection open:query];
 	if (rs != nil)

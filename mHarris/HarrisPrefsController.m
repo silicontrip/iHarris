@@ -18,7 +18,7 @@
 - (id)init
 {
     self = [super init];
-    NSLog(@"Harris Prefs Controller init");
+//    NSLog(@"Harris Prefs Controller init");
     return self;
 }
 
@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do view setup here.
 	
-    NSLog(@"harris prefs controller did load");
+//    NSLog(@"harris prefs controller did load");
     
 	defaults = [NSUserDefaults standardUserDefaults];
 	
@@ -65,7 +65,7 @@
 */
         if ([[transcodeFormat highlightedItem] title] != nil)
             [defaults setObject:[[transcodeFormat highlightedItem] title] forKey:@"transcode format"];
-    NSLog(@"defaults=transcodeFormat: %@\n",[defaults stringForKey:@"transcode format"]);
+ //   NSLog(@"defaults=transcodeFormat: %@\n",[defaults stringForKey:@"transcode format"]);
 	[defaults setObject:[mgxUsername title] forKey:@"MgxUsername"];
 	[defaults setObject:[mgxPassword title] forKey:@"MgxPassword"];
 	[defaults setObject:[dbUsername title] forKey:@"DbUsername"];
@@ -80,7 +80,7 @@
 
 	for (NSDictionary *svr in [dbArrayController arrangedObjects])
 	{
-        NSLog(@"storing db %@:%@",[svr objectForKey:@"server"],[svr objectForKey:@"ip"]);
+  //      NSLog(@"storing db %@:%@",[svr objectForKey:@"server"],[svr objectForKey:@"ip"]);
 		[dbNames addObject:[svr objectForKey:@"server"]];
 		[dbIps addObject:[svr objectForKey:@"ip"]];
 	}
@@ -92,7 +92,7 @@
 	
 	for (NSDictionary *svr in [mgxArrayController arrangedObjects])
 	{
-        NSLog(@"storing mgx %@:%@",[svr objectForKey:@"server"],[svr objectForKey:@"ip"]);
+     //   NSLog(@"storing mgx %@:%@",[svr objectForKey:@"server"],[svr objectForKey:@"ip"]);
 
 		[mgxNames addObject:[svr objectForKey:@"server"]];
 		[mgxIps addObject:[svr objectForKey:@"ip"]];
@@ -105,7 +105,7 @@
 }
 
 - (IBAction)cancel:(id)sender {
-    NSLog(@"prefs controller cancel");
+ //   NSLog(@"prefs controller cancel");
 	// [self setUIFromDefaults];
     [[[self view] window] close];
 
@@ -130,7 +130,7 @@
     [self setTitle:previewPath forKey:@"default preview path"];
     [self setTitle:stillPath forKey:@"default still path"];
 
-    NSLog(@"UI=transcodeFormat: %@\n",[defaults stringForKey:@"transcode format"]);
+ //   NSLog(@"UI=transcodeFormat: %@\n",[defaults stringForKey:@"transcode format"]);
     [transcodeButton selectItemWithTitle:[defaults stringForKey:@"transcode format"]];
     
     //[mgxUsername setTitle:[self getMgxUsername]];

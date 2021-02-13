@@ -13,7 +13,9 @@
 {
     IBOutlet NSSearchFieldCell *searchText; // Search
     IBOutlet NSTableView *searchTableView; // Search
+    
     IBOutlet NSArrayController *searchResults;
+    
     IBOutlet NSProgressIndicator *searchProgress;
     IBOutlet NSButton *refreshButton;
     
@@ -25,7 +27,7 @@
 - (IBAction)selectSearch:(id)sender;
 - (IBAction)refresh:(id)sender;
 - (IBAction)updateFilter:(id)sender;
-- (void)tableViewColumnDidResize:(NSNotification *)notification;
+//- (void)tableViewColumnDidResize:(NSNotification *)notification;
 - (IBAction)beginDrag:(id)sender;
 
 @end
