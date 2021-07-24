@@ -14,7 +14,6 @@
 {
 	self = [super init];
 	defaults = [NSUserDefaults standardUserDefaults];
-
 	dbConnection = nil;
     
 	// would like this to be user configurable somehow
@@ -63,10 +62,10 @@
 {
     // as colums is just a comma seperated string
     // couldn't this be optimised to just return an NSArray<NSString>
-    
+    NSArray* empty = @[];
 	if (dbConnection == nil)
 		if (![self openDb])
-            return nil;
+            return empty;
 
 	// PGSQLRecordset *rs = nil;
 	NSString *query = [NSString stringWithFormat:@"select %@ FROM clips limit 1",columns];
@@ -85,12 +84,13 @@
 		return [columnNames copy];
     }
     NSLog(@"column search returned no results");
-	return nil;
+	return empty;
 }
 
 
 - (NSArray *)executeQuery:(NSString *) query
 {
+    // PGSQLConnection*
     if (dbConnection == nil)
         if (![self openDb])
             return nil;
@@ -99,7 +99,8 @@
 
     NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:0];
     
-    rs = [dbConnection open:query];
+    rs = (PGSQLRecordset*)[dbConnection open:query];
+    
     if (rs != nil)
     {
         // NSInteger rowCount = [rs recordCount];
@@ -123,8 +124,6 @@
                     field = [self timeFormatter:field];
                 }
                 
-                
-                
                 [rowResults addObject:field] ;
             }
             [results addObject:[rowResults copy]];
@@ -144,7 +143,7 @@
     return [self executeQuery:query];
 
 }
-
+/*
 -(NSArray *)listFilesMatching:(NSString *)s
 {
     
@@ -153,7 +152,8 @@
     
     return [self executeQuery:query];
 }
-
+*/
+// Probably class method
 - (NSString *)durationFormatter:(NSString *)frameString
 {
     NSInteger frameLong = [frameString intValue];
@@ -167,6 +167,7 @@
     
 }
 
+// Probably class method
 - (NSString *)timeFormatter:(NSString *)timeString
 {
 
@@ -181,41 +182,6 @@
     
     return [df stringFromDate:modifiedTime];
 }
-
-/*
--(NSArray *)listFilesMatchingAsDictionary:(NSString *)s
-{
-    
-    // this needs to be in a second thread
-    if (dbConnection == nil)
-        if (![self openDb])
-            return nil;
-    
-    PGSQLRecordset *rs = nil;
-    
-    NSString *qs = [dbConnection sqlEncodeString:s];  // hoping this protects from sql exploits
-    NSString *query = [NSString stringWithFormat:@"select %@ FROM clips where umid!='' and longnameid like '%@'",columns,qs];
-    
-    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    rs = [dbConnection open:query];
-    if (rs != nil)
-    {
-        // NSInteger rowCount = [rs recordCount];
-        
-        while (![rs isEOF])
-        {
-            // copy with formatter...
-            
-            
-            [results addObject:[rs dictionaryFromRecord]];
-            [rs moveNext];
-        }
-        
-    }
-    return [results copy];
-}
-*/
 
 -(void)setDBServer:(NSInteger)i
 {

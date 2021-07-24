@@ -301,7 +301,7 @@
             if ([aReader startReading])
             {
                 CMSampleBufferRef sBuf = NULL;
-                while (sBuf = [tcOut copyNextSampleBuffer])
+                while ((sBuf = [tcOut copyNextSampleBuffer]))
                 {
                     CMBlockBufferRef bBuf = CMSampleBufferGetDataBuffer(sBuf);
                     size_t length = CMBlockBufferGetDataLength(bBuf);
@@ -356,7 +356,7 @@
     if (isQTMovie)
     {
         
-        NSDictionary *ma = [qtMovie movieAttributes];
+     //   NSDictionary *ma = [qtMovie movieAttributes];
         NSSize *frameSize = (__bridge NSSize *)([qtMovie attributeForKey:QTMovieNaturalSizeAttribute]);
        // NSLog(@"qt movie size: %@\n",frameSize);
         
@@ -434,7 +434,7 @@
         QTMovie *newMovie = [[QTMovie alloc] initWithMovie:qtMovie
                                                  timeRange:qtRange error:&error];
         
-        NSMutableDictionary *savedMovieAttributes = [NSDictionary
+        NSDictionary *savedMovieAttributes = [NSDictionary
                                                      dictionaryWithObject:[NSNumber numberWithBool:YES]
                                                      forKey:QTMovieFlatten];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -465,19 +465,19 @@
         if (result == AVPlayerViewTrimOKButton) {
             // user selected Trim button (AVPlayerViewTrimOKButton)
             
-            CMTime startTime = [playerItem reversePlaybackEndTime];
-            CMTime endTime = [playerItem forwardPlaybackEndTime];
+            CMTime startTime = [self->playerItem reversePlaybackEndTime];
+            CMTime endTime = [self->playerItem forwardPlaybackEndTime];
             
             NSString *ext = @"mov";
-            if ([[defaults stringForKey:@"selected format"] isEqualToString:@"AUDIO ONLY"])
+            if ([[self->defaults stringForKey:@"selected format"] isEqualToString:@"AUDIO ONLY"])
                 ext = @"aiff";
             
             
-            NSString *path = [NSString stringWithFormat:@"%@/%@_%lld_%lld.%@",[defaults stringForKey:@"default download path"],[defaults stringForKey:@"selected clip"],startTime.value,endTime.value,ext]; // needs some configurability
+            NSString *path = [NSString stringWithFormat:@"%@/%@_%lld_%lld.%@",[self->defaults stringForKey:@"default download path"],[self->defaults stringForKey:@"selected clip"],startTime.value,endTime.value,ext]; // needs some configurability
             NSURL *url = [NSURL fileURLWithPath:path];
-            NSLog(@"export url: %@ with %@",url,[defaults stringForKey:@"transcode format"]);
+            NSLog(@"export url: %@ with %@",url,[self->defaults stringForKey:@"transcode format"]);
             
-            AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:playerItem.asset presetName:[defaults stringForKey:@"transcode format"]];
+            AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:self->playerItem.asset presetName:[self->defaults stringForKey:@"transcode format"]];
             
             [exportSession setOutputFileType:AVFileTypeQuickTimeMovie];
             [exportSession setOutputURL:url];
@@ -522,13 +522,13 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-    BOOL res;
-    NSError *copyError;
+    BOOL res=NO;
+    NSError *copyError = nil;
    // NSLog(@"copy from: %@ to %@",source,destUrl);
     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
         res=[[NSFileManager defaultManager] copyItemAtURL:srcUrl toURL:destUrl error:&copyError];
     
-    if (!res)
+    if ((res==NO) && (copyError != nil))
         [[NSAlert alertWithError:copyError] runModal];
     
     // NSLog(@"<<< saveClipToLocal %d\n",res);
@@ -668,12 +668,15 @@
         AEDesc res;
         OSErr err;
         
-        err = AESendMessage([activate aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout);
-        err = AESendMessage([open aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout);
-    
-        if (err != noErr)
+      if (  ( err = AESendMessage([activate aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout))!= noErr)
         {
-            NSLog(@"error: %d",err);
+            NSLog(@"sending activate message to premiere error: %d",err);
+        }
+    
+    
+        if ( (err = AESendMessage([open aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout)) != noErr)
+        {
+            NSLog(@"sending activate message to premiere error: %d",err);
         }
     });
     

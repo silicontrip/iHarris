@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(id)init;
 -(BOOL)openDb;
--(NSArray *)listFilesMatching:(NSString *)s;
+//-(NSArray *)listFilesMatching:(NSString *)s;
 -(NSArray *)listFiles;
 -(NSArray *)listColumns;
 -(void)setDBServer:(NSInteger)i;

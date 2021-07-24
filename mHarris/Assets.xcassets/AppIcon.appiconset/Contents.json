@@ -15,13 +15,13 @@
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "logo_64-1.png",
+      "filename" : "logo_32-1.png",
       "scale" : "1x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "logo_128-1.png",
+      "filename" : "logo_64-1.png",
       "scale" : "2x"
     },
     {

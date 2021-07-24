@@ -25,9 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-	
-//    NSLog(@"harris prefs controller did load");
-    
+
+	NSLog(@">>> [HarrisPrefsController viewDidLoad]");
+
 	defaults = [NSUserDefaults standardUserDefaults];
 	
 	[mgxServerList setDelegate:self];
@@ -36,14 +36,13 @@
 	[dbServerList setDelegate:self];
 	[dbServerList setDataSource:self];
 
-    
+
     for (NSString *formatName in [AVAssetExportSession allExportPresets])
     {
         NSMenuItem *tfmi = [[NSMenuItem alloc] init];
         [tfmi setTitle:formatName];
         [transcodeFormat addItem:tfmi];
     }
-    
     
 	[self setUIFromDefaults];
 
@@ -52,7 +51,10 @@
 - (IBAction)save:(id)sender {
 
 	// copy from UI to defaults
-    
+	// no no no no no
+	// must use immediate updates... no copy
+	
+	
     /*
     NSLog(@"selected mgx: %ld\n",[mgxServerList selectedRow]);
     NSLog(@"selected db: %ld\n",[dbServerList selectedRow]);
@@ -107,8 +109,7 @@
 - (IBAction)cancel:(id)sender {
  //   NSLog(@"prefs controller cancel");
 	// [self setUIFromDefaults];
-    [[[self view] window] close];
-
+	[[[self view] window] close];
 }
 
 - (void)setTitle:(NSCell *)cell forKey:(NSString *)key
@@ -193,11 +194,30 @@
 }
 
 - (IBAction)addDb:(id)sender {
-	NSMutableDictionary *value = [[NSMutableDictionary alloc] init];
-
-	[value setObject:[NSString stringWithFormat:@""] forKey:@"server"];
-	[value setObject:[NSString stringWithFormat:@""] forKey:@"ip"];
-	[dbArrayController addObject:value];
+    
+    NSSegmentedControl* cc = (NSSegmentedControl*)sender;
+    if ([cc tag] == 0)
+    {
+        
+        NSMutableDictionary *value = [[NSMutableDictionary alloc] init];
+        [value setObject:[NSString stringWithFormat:@"New"] forKey:@"server"];
+        [value setObject:[NSString stringWithFormat:@"New"] forKey:@"ip"];
+        
+        //NSDictionary *value = @{@"server":@"Edit Me",@"ip":@"Edit Me"};
+        
+        [dbArrayController addObject:value];
+    } else {
+        // delete
+        
+        NSInteger selectedRow = [dbServerList selectedRow];
+        [dbArrayController removeObjectAtArrangedObjectIndex:selectedRow];
+        
+    }
 }
-
+/*
+-(IBAction)buttonClose:(id)sender
+{
+	[self dismiss:self];
+}
+*/
 @end

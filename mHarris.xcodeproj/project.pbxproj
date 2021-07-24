@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D23207E25D79F92002F27C3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D23207C25D79F92002F27C3 /* MainMenu.xib */; };
+		4D15A04F26AA743A00363FC0 /* HarrisDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D15A04E26AA743A00363FC0 /* HarrisDispatch.m */; };
+		4D15A05126ABF02C00363FC0 /* test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D15A05026ABF02C00363FC0 /* test.storyboard */; };
 		4D23208725D79FA0002F27C3 /* PublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7721BF4CBD00552383 /* PublishController.m */; };
 		4D23208825D79FD7002F27C3 /* DownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F6321BE1CC2001FC1FF /* DownloadController.m */; };
 		4D23208925D7A00A002F27C3 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7421BE509300552383 /* SearchController.m */; };
@@ -20,13 +21,18 @@
 		4D23209125D7A02B002F27C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */; };
 		4D3E21F525D7ACBC005A3815 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2021B8D3CC00EABD49 /* AppDelegate.m */; };
 		4D3E21F625D7ACFC005A3815 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C2CF2321B8D3CC00EABD49 /* main.m */; };
+		4D9C7A5F25D7D60A00A35963 /* PGSQLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9C7A5E25D7D60900A35963 /* PGSQLKit.framework */; };
+		4D9CCA8325D7E0580003DF13 /* libcurl.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9CCA8225D7E0580003DF13 /* libcurl.4.dylib */; };
 		4DC667F525D7A4630030A8C4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC667F425D7A4630030A8C4 /* QTKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D15A04E26AA743A00363FC0 /* HarrisDispatch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HarrisDispatch.m; path = mHarris/HarrisDispatch.m; sourceTree = "<group>"; };
+		4D15A05026ABF02C00363FC0 /* test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = test.storyboard; sourceTree = "<group>"; };
 		4D23207125D799A5002F27C3 /* mHarris.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = mHarris.app; path = DerivedData/mHarris/Build/Products/Release/mHarris.app; sourceTree = "<group>"; };
 		4D23207725D79F92002F27C3 /* mHarris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mHarris.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D23207D25D79F92002F27C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4D9C7A5E25D7D60900A35963 /* PGSQLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PGSQLKit.framework; path = ../../../../../Library/Frameworks/PGSQLKit.framework; sourceTree = "<group>"; };
+		4D9CCA8225D7E0580003DF13 /* libcurl.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.4.dylib; path = ../../../../../usr/lib/libcurl.4.dylib; sourceTree = "<group>"; };
 		4DC667F425D7A4630030A8C4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/QTKit.framework; sourceTree = DEVELOPER_DIR; };
 		922E8E7321BE509300552383 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchController.h; path = mHarris/SearchController.h; sourceTree = "<group>"; };
 		922E8E7421BE509300552383 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchController.m; path = mHarris/SearchController.m; sourceTree = "<group>"; };
@@ -60,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D9CCA8325D7E0580003DF13 /* libcurl.4.dylib in Frameworks */,
+				4D9C7A5F25D7D60A00A35963 /* PGSQLKit.framework in Frameworks */,
 				4DC667F525D7A4630030A8C4 /* QTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +78,8 @@
 		922F5F5A21B8D51A001FC1FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D9CCA8225D7E0580003DF13 /* libcurl.4.dylib */,
+				4D9C7A5E25D7D60900A35963 /* PGSQLKit.framework */,
 				4DC667F425D7A4630030A8C4 /* QTKit.framework */,
 			);
 			name = Frameworks;
@@ -108,13 +118,14 @@
 				922E8E7321BE509300552383 /* SearchController.h */,
 				922E8E7421BE509300552383 /* SearchController.m */,
 				92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */,
-				4D23207C25D79F92002F27C3 /* MainMenu.xib */,
 				92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */,
+				4D15A05026ABF02C00363FC0 /* test.storyboard */,
 				922E8E7921BF6E3600552383 /* PreviewController.h */,
 				922E8E7A21BF6E3600552383 /* PreviewController.m */,
 				922F5F4D21B8D464001FC1FF /* BrowseActionListener.h */,
 				922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */,
 				922F5F4F21B8D464001FC1FF /* Harris.h */,
+				4D15A04E26AA743A00363FC0 /* HarrisDispatch.m */,
 				922F5F5021B8D464001FC1FF /* Harris.m */,
 				922F5F5121B8D464001FC1FF /* HarrisPrefsController.h */,
 				922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */,
@@ -184,8 +195,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D23207E25D79F92002F27C3 /* MainMenu.xib in Resources */,
 				4D23209125D7A02B002F27C3 /* Assets.xcassets in Resources */,
+				4D15A05126ABF02C00363FC0 /* test.storyboard in Resources */,
 				4D23209025D7A028002F27C3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D23208725D79FA0002F27C3 /* PublishController.m in Sources */,
+				4D15A04F26AA743A00363FC0 /* HarrisDispatch.m in Sources */,
 				4D23208D25D7A00A002F27C3 /* HarrisPrefsController.m in Sources */,
 				4D23208A25D7A00A002F27C3 /* PreviewController.m in Sources */,
 				4D23208C25D7A00A002F27C3 /* Harris.m in Sources */,
@@ -213,21 +225,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4D23207C25D79F92002F27C3 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4D23207D25D79F92002F27C3 /* Base */,
-			);
-			name = MainMenu.xib;
-			path = mHarris;
-			sourceTree = "<group>";
-		};
 		92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				92C2CF2B21B8D3CC00EABD49 /* Base */,
 			);
 			name = Main.storyboard;
+			path = mHarris;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -242,10 +246,15 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = mHarris.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				"HEADER_SEARCH_PATHS[arch=*]" = /Library/Frameworks/QTKit.framework/Versions/A/Headers;
 				INFOPLIST_FILE = mHarris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -268,10 +277,15 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = mHarris.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				"HEADER_SEARCH_PATHS[arch=*]" = /Library/Frameworks/QTKit.framework/Versions/A/Headers;
 				INFOPLIST_FILE = mHarris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

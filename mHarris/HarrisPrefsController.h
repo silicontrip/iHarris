@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	IBOutlet NSTextFieldCell *dbUsername;
 	IBOutlet NSSecureTextFieldCell *dbPassword;
+    
 	IBOutlet NSTableView *dbServerList;
 
 	IBOutlet NSArrayController *mgxArrayController;
@@ -30,7 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
     IBOutlet NSTextFieldCell *stillPath;
     IBOutlet NSMenu *transcodeFormat;
     IBOutlet NSPopUpButton *transcodeButton;
-    
+	
+	IBOutlet NSView* prefsView;
+	
 	NSUserDefaults *defaults;
 	
 }
@@ -39,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)cancel:(id)sender;
 - (IBAction)addMgx:(id)sender;
 - (IBAction)addDb:(id)sender;
+//- (IBAction)buttonClose:(id)sender;
 
 - (void)setUIFromDefaults;
 - (void)setTitle:(NSCell *)cell forKey:(NSString *)key;

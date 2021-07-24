@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xq0-6Q-ftd">
     <dependencies>
         <deployment version="101100" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
@@ -25,7 +25,7 @@
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
-                                                <segue destination="Ens-So-Aex" kind="modal" id="FKh-oA-v6h"/>
+                                                <segue destination="aMS-8M-oSf" kind="modal" id="Ijn-64-xe2"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -361,55 +361,32 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1062" y="-251"/>
-        </scene>
-        <!--Prefs Window Controller-->
-        <scene sceneID="OP6-we-5l1">
-            <objects>
-                <windowController id="Ens-So-Aex" userLabel="Prefs Window Controller" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="I6b-cv-gDM">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="245" y="301" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <connections>
-                            <binding destination="mKw-Rt-HnU" name="visible" keyPath="values.prefsWindow" id="4hg-qQ-N1Y"/>
-                            <outlet property="delegate" destination="Ens-So-Aex" id="3T4-Ti-M6g"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="aMS-8M-oSf" kind="relationship" relationship="window.shadowedContentViewController" id="zqh-He-4rS"/>
-                    </connections>
-                </windowController>
-                <customObject id="OVm-CV-QrA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <userDefaultsController id="mKw-Rt-HnU"/>
-            </objects>
-            <point key="canvasLocation" x="-1016" y="126"/>
+            <point key="canvasLocation" x="-360" y="355"/>
         </scene>
         <!--Harris Prefs Controller-->
         <scene sceneID="IgA-Rz-u1K">
             <objects>
                 <viewController showSeguePresentationStyle="single" id="aMS-8M-oSf" customClass="HarrisPrefsController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="KVw-ZG-CPm" userLabel="Harris Prefs View">
-                        <rect key="frame" x="0.0" y="0.0" width="504" height="520"/>
+                    <view key="view" id="KVw-ZG-CPm" userLabel="Harris Prefs View">
+                        <rect key="frame" x="0.0" y="0.0" width="504" height="576"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView autoresizesSubviews="NO" distribution="equalCentering" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="jeE-c0-tdS">
-                                <rect key="frame" x="8" y="8" width="488" height="529"/>
+                                <rect key="frame" x="8" y="8" width="488" height="560"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ea6-3l-beM">
-                                        <rect key="frame" x="-2" y="512" width="88" height="17"/>
+                                        <rect key="frame" x="-2" y="543" width="88" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="MGX Servers" id="7PL-x8-ZMV">
                                             <font key="font" metaFont="systemBold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhT-sk-Dod">
-                                        <rect key="frame" x="0.0" y="408" width="488" height="100"/>
+                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhT-sk-Dod" customClass="NSSeg">
+                                        <rect key="frame" x="0.0" y="439" width="488" height="100"/>
                                         <clipView key="contentView" id="oX3-SZ-91e">
                                             <rect key="frame" x="1" y="0.0" width="486" height="99"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView identifier="MgxServerList" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Zg4-xZ-mgd" id="U7P-SG-540">
                                                     <rect key="frame" x="0.0" y="0.0" width="486" height="76"/>
@@ -459,6 +436,9 @@
                                                             </connections>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <binding destination="nMR-FY-uVn" name="content" keyPath="arrangedObjects" id="4ND-WE-iRa"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                         </clipView>
@@ -478,47 +458,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N0m-0M-ZZt">
-                                        <rect key="frame" x="0.0" y="385" width="48" height="19"/>
-                                        <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iEy-Oh-RkA">
-                                                <rect key="frame" x="0.0" y="-1" width="20" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="lQb-9H-VOY"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FIb-hF-NVg">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="addMgx:" target="aMS-8M-oSf" id="DP6-jd-XcU"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="393-9k-K32">
-                                                <rect key="frame" x="28" y="-1" width="20" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="vHM-3h-lUO"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PKx-eg-Y1J">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="remove:" target="nMR-FY-uVn" id="dP8-0a-RIC"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
                                     <stackView distribution="equalSpacing" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gu-bi-Wje">
-                                        <rect key="frame" x="0.0" y="359" width="488" height="22"/>
+                                        <rect key="frame" x="0.0" y="413" width="488" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jW2-Bn-j1W">
                                                 <rect key="frame" x="-2" y="5" width="99" height="17"/>
@@ -547,7 +488,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmy-0L-gtn">
-                                        <rect key="frame" x="0.0" y="333" width="488" height="22"/>
+                                        <rect key="frame" x="0.0" y="387" width="488" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NSE-8d-WeE">
                                                 <rect key="frame" x="-2" y="5" width="96" height="17"/>
@@ -578,11 +519,21 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <segmentedControl verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccV-Rg-BzL">
+                                        <rect key="frame" x="0.0" y="360" width="488" height="23"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="momentary" id="q23-rb-yEw">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment image="NSAddTemplate" width="32"/>
+                                                <segment image="NSRemoveTemplate" width="32" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="IE1-CP-Xjd">
-                                        <rect key="frame" x="0.0" y="326" width="488" height="5"/>
+                                        <rect key="frame" x="0.0" y="343" width="488" height="5"/>
                                     </box>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eA8-SI-oe6">
-                                        <rect key="frame" x="-2" y="307" width="76" height="17"/>
+                                        <rect key="frame" x="-2" y="311" width="76" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="DB Servers" id="hHk-HU-6fd">
                                             <font key="font" metaFont="systemBold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -590,10 +541,10 @@
                                         </textFieldCell>
                                     </textField>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYt-5L-TE2">
-                                        <rect key="frame" x="0.0" y="203" width="488" height="100"/>
+                                        <rect key="frame" x="0.0" y="207" width="488" height="100"/>
                                         <clipView key="contentView" id="PGK-Qb-RHn">
                                             <rect key="frame" x="1" y="0.0" width="486" height="99"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView identifier="DbServerList" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="pw7-5o-Kct" id="LN0-i4-Tjz">
                                                     <rect key="frame" x="0.0" y="0.0" width="486" height="76"/>
@@ -614,9 +565,6 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                            <connections>
-                                                                <binding destination="9II-2P-v5b" name="value" keyPath="arrangedObjects.server" id="jOM-B4-pEv"/>
-                                                            </connections>
                                                         </tableColumn>
                                                         <tableColumn identifier="ServerIP" width="362" minWidth="40" maxWidth="1000" id="ob0-5w-Iq6">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="IP">
@@ -630,9 +578,6 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                            <connections>
-                                                                <binding destination="9II-2P-v5b" name="value" keyPath="arrangedObjects.ip" id="cQH-pS-YKe"/>
-                                                            </connections>
                                                         </tableColumn>
                                                     </tableColumns>
                                                 </tableView>
@@ -654,47 +599,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LhW-YO-hNW">
-                                        <rect key="frame" x="0.0" y="180" width="48" height="19"/>
-                                        <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JT6-wu-BZA">
-                                                <rect key="frame" x="0.0" y="-1" width="20" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="nYu-Nt-HRi"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lrD-VY-5M0">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="addDb:" target="aMS-8M-oSf" id="lwv-MF-e6Q"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="unX-dN-YfA">
-                                                <rect key="frame" x="28" y="-1" width="20" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="2DX-3S-An6"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rps-YW-p8y">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="remove:" target="9II-2P-v5b" id="881-d7-1eh"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                    <segmentedControl verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7u-Wz-3Iz">
+                                        <rect key="frame" x="0.0" y="181" width="488" height="23"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="momentary" id="zbD-UH-TEt">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment image="NSAddTemplate" width="32"/>
+                                                <segment image="NSRemoveTemplate" width="32" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9P-CF-SIK">
-                                        <rect key="frame" x="0.0" y="154" width="488" height="22"/>
+                                        <rect key="frame" x="0.0" y="156" width="488" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CAe-4w-DLl">
                                                 <rect key="frame" x="-2" y="5" width="88" height="17"/>
@@ -723,7 +639,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGH-xj-1mM">
-                                        <rect key="frame" x="0.0" y="128" width="488" height="22"/>
+                                        <rect key="frame" x="0.0" y="130" width="488" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b9v-70-tFI">
                                                 <rect key="frame" x="-2" y="5" width="84" height="17"/>
@@ -755,7 +671,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NAL-Xr-RYP">
-                                        <rect key="frame" x="0.0" y="102" width="488" height="22"/>
+                                        <rect key="frame" x="0.0" y="104" width="488" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5X-AI-TK1">
                                                 <rect key="frame" x="-2" y="5" width="95" height="17"/>
@@ -784,7 +700,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVl-4Z-NqU">
-                                        <rect key="frame" x="0.0" y="76" width="488" height="22"/>
+                                        <rect key="frame" x="0.0" y="78" width="488" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdE-rs-Ckb">
                                                 <rect key="frame" x="-2" y="5" width="83" height="17"/>
@@ -813,7 +729,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W0G-Oc-xmh">
-                                        <rect key="frame" x="0.0" y="50" width="488" height="22"/>
+                                        <rect key="frame" x="0.0" y="52" width="488" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jx9-qN-Sv0">
                                                 <rect key="frame" x="-2" y="5" width="58" height="17"/>
@@ -842,7 +758,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="equalCentering" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScM-Bt-mKT">
-                                        <rect key="frame" x="0.0" y="25" width="488" height="21"/>
+                                        <rect key="frame" x="0.0" y="26" width="488" height="21"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t2H-5C-Df9">
                                                 <rect key="frame" x="-2" y="4" width="115" height="17"/>
@@ -886,7 +802,7 @@ Gw
 </string>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="cancel:" target="aMS-8M-oSf" id="wr4-2p-6eH"/>
+                                                    <action selector="cancel:" target="aMS-8M-oSf" id="3Ba-6a-vya"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NaW-4x-3fp">
@@ -899,7 +815,7 @@ Gw
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="save:" target="aMS-8M-oSf" id="Wob-4c-ubZ"/>
+                                                    <action selector="save:" target="aMS-8M-oSf" id="R6d-c3-Xex"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -959,7 +875,6 @@ Gw
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dbArrayController" destination="9II-2P-v5b" id="oEj-iS-eng"/>
                         <outlet property="dbPassword" destination="8b0-Wb-2g0" id="eZq-9u-8EK"/>
                         <outlet property="dbServerList" destination="LN0-i4-Tjz" id="xdL-st-MZf"/>
                         <outlet property="dbUsername" destination="RWP-Ni-8mk" id="HT7-TY-3iV"/>
@@ -968,7 +883,6 @@ Gw
                         <outlet property="mgxPassword" destination="xYu-UK-FKJ" id="8La-TR-6TQ"/>
                         <outlet property="mgxServerList" destination="U7P-SG-540" id="we8-qO-CIw"/>
                         <outlet property="mgxUsername" destination="nJ3-Sw-Ryo" id="fNA-u7-hUv"/>
-                        <outlet property="prefsView" destination="KVw-ZG-CPm" id="Dpj-vg-Odg"/>
                         <outlet property="previewPath" destination="QWG-ab-lb1" id="5fb-Sq-Mty"/>
                         <outlet property="stillPath" destination="Zze-tk-sI6" id="kZi-7Z-5rv"/>
                         <outlet property="transcodeButton" destination="lNl-PP-9Jl" id="xX7-E4-3Ak"/>
@@ -976,36 +890,20 @@ Gw
                     </connections>
                 </viewController>
                 <customObject id="pwx-fi-HGK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="NSMutableArray" id="9II-2P-v5b" userLabel="db"/>
                 <arrayController objectClassName="NSMutableArray" id="nMR-FY-uVn" userLabel="mgx"/>
+                <arrayController id="xz2-nl-bmt" userLabel="db">
+                    <declaredKeys>
+                        <string>Server</string>
+                        <string>IP</string>
+                    </declaredKeys>
+                </arrayController>
             </objects>
-            <point key="canvasLocation" x="-1295.5" y="778.5"/>
+            <point key="canvasLocation" x="-650" y="874"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="R2V-B0-nI4">
-            <objects>
-                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="mHarris" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <connections>
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="Xq0-6Q-ftd" kind="relationship" relationship="window.shadowedContentViewController" id="1bd-PV-L5s"/>
-                    </connections>
-                </windowController>
-                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-623" y="568"/>
-        </scene>
-        <!--Tab View Controller-->
+        <!--mHarris-->
         <scene sceneID="wxK-lB-EYK">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="Xq0-6Q-ftd" sceneMemberID="viewController">
+                <tabViewController title="mHarris" showSeguePresentationStyle="single" selectedTabViewItemIndex="0" id="Xq0-6Q-ftd" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="Yry-So-NBg"/>
                         <tabViewItem id="MEf-Ao-f77"/>
@@ -1028,34 +926,21 @@ Gw
                 </tabViewController>
                 <customObject id="4ft-fp-VrT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="103" y="672"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="pqQ-EU-ecH">
-            <objects>
-                <viewController id="hzB-7t-6hd" sceneMemberID="viewController">
-                    <view key="view" id="98l-Co-909">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="F8K-AQ-3vv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="283" y="-168"/>
+            <point key="canvasLocation" x="110" y="666"/>
         </scene>
         <!--Download-->
         <scene sceneID="1eJ-SE-6O6">
             <objects>
                 <viewController title="Download" id="yLw-bc-TOF" customClass="DownloadController" sceneMemberID="viewController">
                     <view key="view" id="JFh-d8-3Ix">
-                        <rect key="frame" x="0.0" y="0.0" width="1038" height="318"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1050" height="318"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView autoresizesSubviews="NO" distribution="equalSpacing" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" horizontalHuggingPriority="1" verticalHuggingPriority="1" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tav-OT-zUa" userLabel="Download Stack">
-                                <rect key="frame" x="8" y="200" width="1022" height="110"/>
+                                <rect key="frame" x="8" y="200" width="1034" height="110"/>
                                 <subviews>
                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4KE-9D-c1s" userLabel="Clip Stack">
-                                        <rect key="frame" x="0.0" y="88" width="1022" height="22"/>
+                                        <rect key="frame" x="0.0" y="88" width="1034" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ETm-PU-xqw">
                                                 <rect key="frame" x="-2" y="3" width="67" height="17"/>
@@ -1066,7 +951,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="1" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XKB-JJ-g19" userLabel="Clip Name Text Field">
-                                                <rect key="frame" x="71" y="0.0" width="951" height="22"/>
+                                                <rect key="frame" x="71" y="0.0" width="963" height="22"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="tuB-kE-ZV2">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1084,7 +969,7 @@ Gw
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="sH2-SC-Nep" userLabel="Path Stack">
-                                        <rect key="frame" x="0.0" y="58" width="1022" height="22"/>
+                                        <rect key="frame" x="0.0" y="58" width="1034" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsK-CG-LjS">
                                                 <rect key="frame" x="-2" y="3" width="95" height="17"/>
@@ -1095,7 +980,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="1" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eFe-UA-BgL" userLabel="Download Text Field">
-                                                <rect key="frame" x="99" y="0.0" width="889" height="22"/>
+                                                <rect key="frame" x="99" y="0.0" width="901" height="22"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="epQ-fy-rkR">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1103,7 +988,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wYN-aR-pq7" userLabel="Browse">
-                                                <rect key="frame" x="996" y="-2" width="26" height="25"/>
+                                                <rect key="frame" x="1008" y="-2" width="26" height="25"/>
                                                 <buttonCell key="cell" type="roundTextured" title="..." bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wZE-6Q-A28">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1125,7 +1010,7 @@ Gw
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="5wP-WX-O5F">
-                                        <rect key="frame" x="0.0" y="29" width="1022" height="21"/>
+                                        <rect key="frame" x="0.0" y="29" width="1034" height="21"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-f9-3NA">
                                                 <rect key="frame" x="-2" y="2" width="98" height="17"/>
@@ -1136,7 +1021,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fky-0F-urr">
-                                                <rect key="frame" x="958" y="-3" width="67" height="26"/>
+                                                <rect key="frame" x="970" y="-3" width="67" height="26"/>
                                                 <popUpButtonCell key="cell" type="push" title="MXF" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="xzp-4g-dqn" id="TcK-8T-Meb">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
@@ -1177,7 +1062,7 @@ Gw
                                         </customSpacing>
                                     </stackView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BlN-7T-FI9">
-                                        <rect key="frame" x="-6" y="-7" width="1034" height="32"/>
+                                        <rect key="frame" x="-6" y="-7" width="1046" height="32"/>
                                         <buttonCell key="cell" type="push" title="Download" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jpp-Ae-Oy7">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1216,7 +1101,7 @@ Gw
                 <customObject id="Jc5-Ym-4S2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="J1m-jG-bev"/>
             </objects>
-            <point key="canvasLocation" x="742" y="216"/>
+            <point key="canvasLocation" x="358" y="-332"/>
         </scene>
         <!--Publish-->
         <scene sceneID="UF3-oj-EEB">
@@ -1316,14 +1201,14 @@ Gw
             <objects>
                 <viewController title="Search" id="Wha-Pd-pqD" customClass="SearchController" sceneMemberID="viewController">
                     <view key="view" id="xDt-DN-2C1">
-                        <rect key="frame" x="0.0" y="0.0" width="554" height="308"/>
+                        <rect key="frame" x="0.0" y="0.0" width="554" height="379"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="equalSpacing" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0K4-Jb-OAD" userLabel="Search Stack">
-                                <rect key="frame" x="8" y="8" width="538" height="292"/>
+                                <rect key="frame" x="8" y="8" width="538" height="363"/>
                                 <subviews>
                                     <stackView autoresizesSubviews="NO" distribution="equalSpacing" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUV-CR-EXm">
-                                        <rect key="frame" x="0.0" y="270" width="538" height="22"/>
+                                        <rect key="frame" x="0.0" y="341" width="538" height="22"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UKq-Rr-hhn">
                                                 <rect key="frame" x="0.0" y="0.0" width="431" height="22"/>
@@ -1365,7 +1250,7 @@ Gw
                                         <rect key="frame" x="0.0" y="0.0" width="538" height="262"/>
                                         <clipView key="contentView" id="KcZ-K7-G3T">
                                             <rect key="frame" x="1" y="0.0" width="536" height="261"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="t4g-iT-RsR" id="8kG-4k-7vm">
                                                     <rect key="frame" x="0.0" y="0.0" width="536" height="238"/>
@@ -1379,6 +1264,7 @@ Gw
                                                 </tableView>
                                             </subviews>
                                         </clipView>
+                                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                         <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="mz9-pe-fsm">
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1422,7 +1308,7 @@ Gw
                 <userDefaultsController id="5uz-3N-zqo"/>
                 <arrayController editable="NO" id="32D-ve-Y3w" userLabel="searchResults"/>
             </objects>
-            <point key="canvasLocation" x="874" y="947"/>
+            <point key="canvasLocation" x="874" y="982.5"/>
         </scene>
         <!--Preview-->
         <scene sceneID="prC-gR-mIx">
@@ -1649,7 +1535,7 @@ Gw
                 </viewController>
                 <customObject id="N9J-XO-169" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975" y="-285"/>
+            <point key="canvasLocation" x="924" y="99"/>
         </scene>
     </scenes>
     <resources>

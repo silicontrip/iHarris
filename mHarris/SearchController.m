@@ -118,13 +118,13 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
        //NSLog(@"background thread");
 
-        NSArray *res = [harris listFiles];
+        NSArray *res = [self->harris listFiles];
             unsigned long colNum=0;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [searchProgress stopAnimation:nil];
-            [searchProgress setIndeterminate:NO];
-            [searchProgress setDoubleValue:0];
-            [searchProgress setMaxValue:[res count]];
+            [self->searchProgress stopAnimation:nil];
+            [self->searchProgress setIndeterminate:NO];
+            [self->searchProgress setDoubleValue:0];
+            [self->searchProgress setMaxValue:[res count]];
         });
         // NSLog(@"for rows");
         
@@ -135,15 +135,14 @@
                 for (NSString *colData in row)
                 {
            // NSLog(@"Populating column: %lu: %@",colNum,colData);
-
-                        [value setObject:colData forKey:[NSString stringWithFormat:@"%@",[colNames objectAtIndex:colNum]]];
+					[value setObject:colData forKey:[NSString stringWithFormat:@"%@",[colNames objectAtIndex:colNum]]];
                     colNum++;
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                    // NSLog(@"main thread");
-                    [searchTableView reloadData];
-                    [searchResults addObject:value];
-                    [searchProgress incrementBy:1];
+                    [self->searchTableView reloadData];
+                    [self->searchResults addObject:value];
+                    [self->searchProgress incrementBy:1];
                 });
                 //[searchProgress incrementBy:1];
             }
@@ -154,9 +153,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
            // NSLog(@"main thread");
           //  NSLog(@"stop animation");
-            [searchProgress setHidden:YES];
-            [searchProgress stopAnimation:nil];
-            [refreshButton setEnabled:YES];
+            [self->searchProgress setHidden:YES];
+            [self->searchProgress stopAnimation:nil];
+            [self->refreshButton setEnabled:YES];
 
        });
       //  [searchProgress stopAnimation:nil];
@@ -178,6 +177,7 @@
         [searchResults setFilterPredicate:filt];
     }
 }
+
 
 
 @end
