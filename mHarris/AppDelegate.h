@@ -9,20 +9,22 @@
 #import <Cocoa/Cocoa.h>
 #import "Harris.h"
 
+@class Harris;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-    NSUserDefaults *defaults;
+   // NSUserDefaults *defaults;
     Harris *harris;
     IBOutlet NSMenuItem *saveMenu;
-    
     IBOutlet NSWindowController *mainWindow;
     
     // log file
     
 }
 
-- (Harris *)getHarris;
-- (NSUserDefaults *)getDefaults;
+- (Harris *)harris;
+//- (NSUserDefaults *)getDefaults;
+- (NSUserDefaults *)defaults;
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag;
 
 @end

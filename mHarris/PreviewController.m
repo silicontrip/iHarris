@@ -15,14 +15,14 @@
 @implementation PreviewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
-   // NSLog(@"[PreviewController viewDidLoad]");
-    
-    AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    defaults = [ad getDefaults];
-    harris = [ad getHarris];
-    acceptsFirstResponder = YES;
+	[super viewDidLoad];
+	// Do view setup here.
+	// NSLog(@"[PreviewController viewDidLoad]");
+
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+	defaults = [ad defaults];
+	harris = [ad harris];
+	acceptsFirstResponder = YES;
 }
 - (void)viewDidAppear {
    // NSLog(@"[PreviewController viewDidAppear]");

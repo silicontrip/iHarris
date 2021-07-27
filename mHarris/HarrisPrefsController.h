@@ -8,49 +8,24 @@
 
 #import <Cocoa/Cocoa.h>
 #import <AVFoundation/AVFoundation.h>
+#import "AppDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HarrisPrefsController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
+@interface HarrisPrefsController : NSViewController
 {
-	IBOutlet NSTextFieldCell *mgxUsername;
-	IBOutlet NSSecureTextFieldCell *mgxPassword;
-	IBOutlet NSTableView *mgxServerList;
-	
-	IBOutlet NSTextFieldCell *dbUsername;
-	IBOutlet NSSecureTextFieldCell *dbPassword;
-    
-	IBOutlet NSTableView *dbServerList;
 
-	IBOutlet NSArrayController *mgxArrayController;
-	IBOutlet NSArrayController *dbArrayController;
-	
-    IBOutlet NSTextFieldCell *downloadPath;
-    IBOutlet NSTextFieldCell *previewPath;
-    
-    IBOutlet NSTextFieldCell *stillPath;
-    IBOutlet NSMenu *transcodeFormat;
-    IBOutlet NSPopUpButton *transcodeButton;
-	
-	IBOutlet NSView* prefsView;
-	
-	NSUserDefaults *defaults;
-	
+	// NSUserDefaults *defaults;
+//	NSArrayController* _formatController;
+	NSArray<NSString*>* _availableFormats;
 }
 
-- (IBAction)save:(id)sender;
-- (IBAction)cancel:(id)sender;
-- (IBAction)addMgx:(id)sender;
-- (IBAction)addDb:(id)sender;
-//- (IBAction)buttonClose:(id)sender;
+//@property (strong,nonatomic,readwrite) NSArrayController* formatController;
+//@property (strong,nonatomic,readwrite) NSMutableArray<NSString*>* availableFormats;
+//@property (strong,nonatomic,readwrite) NSArray<NSString*>* test;
 
-- (void)setUIFromDefaults;
-- (void)setTitle:(NSCell *)cell forKey:(NSString *)key;
+- (void)viewDidLoad;
 
-- (NSArray<NSString *> *)getMgxNameList;
-- (NSArray<NSString *> *)getMgxIpList;
-- (NSArray<NSString *> *)getDbNameList;
-- (NSArray<NSString *> *)getDbIpList;
 
 @end
 

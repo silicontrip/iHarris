@@ -17,25 +17,42 @@
 NSFileHandle *logFile = nil;
 
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     
-    //NSLog(@"app delegate init");
-    
-    defaults = [NSUserDefaults standardUserDefaults];
-    harris = [[Harris alloc] init];
-    
-    [defaults setObject:@"YES" forKey:@"app did start"];
-    [defaults synchronize];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
-    
-    logFile = [NSFileHandle fileHandleForWritingAtPath:logPath];
+    NSLog(@">>> [AppDelegate init]");
+	
+	NSDictionary *mgxList = [ NSDictionary dictionaryWithObjectsAndKeys:@"10.35.131.146", @"MGX1", @"10.35.131.147", @"MGX2", nil];
+	NSDictionary *cifsList = [ NSDictionary dictionaryWithObjectsAndKeys:@"10.35.132.105", @"CIFS1", @"10.35.132.106", @"CIFS2", @"10.35.132.108", @"CIFS3", nil];
 
-    return self;
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+
+	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:mgxList, @"MgxServers",
+								 @"iharris", @"MgxUsername",
+								 @"mgx", @"MgxPassword",
+								 cifsList, @"DbServers",
+								 @"GFXMAC01", @"DbUsername",
+								 @"GFXMAC01", @"DbPassword",
+								 @"longnameid,modifiedtimestamp,duration,codecname,username,videoformatstring", @"DbColumns",
+								 @"AVAssetExportPreset1920x1080", @"SelectedTranscodeFormat",
+								 documentsDirectory, @"StillPath",
+								 @"/Volumes/NEXIO1", @"PreviewPath",
+								 documentsDirectory, @"DownloadPath",
+								 nil];
+	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+	
+	harris = [[Harris alloc] init];
     
+    // [defaults setObject:@"YES" forKey:@"app did start"];
+    // [defaults synchronize];
+    
+  //  NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
+   // logFile = [NSFileHandle fileHandleForWritingAtPath:logPath];
+
+	return self;
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -48,8 +65,9 @@ NSFileHandle *logFile = nil;
 	// Insert code here to tear down your application
 }
 
-- (Harris *)getHarris { return harris; }
-- (NSUserDefaults *)getDefaults { return defaults; }
+- (Harris *)harris { return harris; }
+
+- (NSUserDefaults *)defaults { return [NSUserDefaults standardUserDefaults]; }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
@@ -64,8 +82,5 @@ NSFileHandle *logFile = nil;
     return YES;
     // return !flag;
 }
-
-
-
 
 @end

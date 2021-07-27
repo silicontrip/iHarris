@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D15A04F26AA743A00363FC0 /* HarrisDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D15A04E26AA743A00363FC0 /* HarrisDispatch.m */; };
-		4D15A05126ABF02C00363FC0 /* test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D15A05026ABF02C00363FC0 /* test.storyboard */; };
+		4D221B1B26AFA137004C1D2D /* HarrisPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */; };
 		4D23208725D79FA0002F27C3 /* PublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7721BF4CBD00552383 /* PublishController.m */; };
 		4D23208825D79FD7002F27C3 /* DownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F6321BE1CC2001FC1FF /* DownloadController.m */; };
 		4D23208925D7A00A002F27C3 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7421BE509300552383 /* SearchController.m */; };
 		4D23208A25D7A00A002F27C3 /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7A21BF6E3600552383 /* PreviewController.m */; };
 		4D23208B25D7A00A002F27C3 /* BrowseActionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */; };
 		4D23208C25D7A00A002F27C3 /* Harris.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5021B8D464001FC1FF /* Harris.m */; };
-		4D23208D25D7A00A002F27C3 /* HarrisPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */; };
 		4D23208E25D7A00A002F27C3 /* SearchTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 927A130B21C9F580007E88D9 /* SearchTable.m */; };
 		4D23209025D7A028002F27C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */; };
 		4D23209125D7A02B002F27C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */; };
@@ -27,8 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4D15A04E26AA743A00363FC0 /* HarrisDispatch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HarrisDispatch.m; path = mHarris/HarrisDispatch.m; sourceTree = "<group>"; };
-		4D15A05026ABF02C00363FC0 /* test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = test.storyboard; sourceTree = "<group>"; };
 		4D23207125D799A5002F27C3 /* mHarris.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = mHarris.app; path = DerivedData/mHarris/Build/Products/Release/mHarris.app; sourceTree = "<group>"; };
 		4D23207725D79F92002F27C3 /* mHarris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mHarris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D9C7A5E25D7D60900A35963 /* PGSQLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PGSQLKit.framework; path = ../../../../../Library/Frameworks/PGSQLKit.framework; sourceTree = "<group>"; };
@@ -119,13 +115,11 @@
 				922E8E7421BE509300552383 /* SearchController.m */,
 				92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */,
 				92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */,
-				4D15A05026ABF02C00363FC0 /* test.storyboard */,
 				922E8E7921BF6E3600552383 /* PreviewController.h */,
 				922E8E7A21BF6E3600552383 /* PreviewController.m */,
 				922F5F4D21B8D464001FC1FF /* BrowseActionListener.h */,
 				922F5F4E21B8D464001FC1FF /* BrowseActionListener.m */,
 				922F5F4F21B8D464001FC1FF /* Harris.h */,
-				4D15A04E26AA743A00363FC0 /* HarrisDispatch.m */,
 				922F5F5021B8D464001FC1FF /* Harris.m */,
 				922F5F5121B8D464001FC1FF /* HarrisPrefsController.h */,
 				922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */,
@@ -196,7 +190,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D23209125D7A02B002F27C3 /* Assets.xcassets in Resources */,
-				4D15A05126ABF02C00363FC0 /* test.storyboard in Resources */,
 				4D23209025D7A028002F27C3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,8 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D23208725D79FA0002F27C3 /* PublishController.m in Sources */,
-				4D15A04F26AA743A00363FC0 /* HarrisDispatch.m in Sources */,
-				4D23208D25D7A00A002F27C3 /* HarrisPrefsController.m in Sources */,
+				4D221B1B26AFA137004C1D2D /* HarrisPrefsController.m in Sources */,
 				4D23208A25D7A00A002F27C3 /* PreviewController.m in Sources */,
 				4D23208C25D7A00A002F27C3 /* Harris.m in Sources */,
 				4D23208925D7A00A002F27C3 /* SearchController.m in Sources */,

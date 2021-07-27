@@ -19,7 +19,7 @@
     //NSLog(@"publish controller did load");
 
     AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    defaults = [ad getDefaults];
+    defaults = [ad defaults];
     
     // Do view setup here.
     publishBrowseListener = [[BrowseActionListener alloc] initWithField:publishText

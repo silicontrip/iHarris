@@ -22,6 +22,7 @@
     Harris *harris;
     NSUserDefaults *defaults;
     NSDictionary *columnWidthDefaults;
+	NSArray<NSString *> *colNames;
 }
 
 - (IBAction)selectSearch:(id)sender;

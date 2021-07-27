@@ -24,8 +24,8 @@
                                                                     mode:2];
     
     AppDelegate *ad  = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    harris = [ad getHarris];
-    defaults = [ad getDefaults];
+    harris = [ad harris];
+    defaults = [ad defaults];
     
 }
 

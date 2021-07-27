@@ -8,39 +8,35 @@
 
 #import <Foundation/Foundation.h>
 #import <PGSQLKit/PGSQLKit.h>
+#import "AppDelegate.h"
 #include <curl/curl.h>
 #include <stdio.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Harris : NSObject
 {
-    NSArray<NSString *> *mgxList;
-    NSArray<NSString *> *dbList;
+    //NSArray<NSString *> *mgxList;
+    //NSArray<NSString *> *dbList;
 
     NSUserDefaults *defaults ;
     
-	NSURL *ftpServer;
-	NSString *dbServer;
+	//NSURL *ftpServer;
+	//NSString *dbServer;
 
 	PGSQLConnection *dbConnection;
-	NSString *columns;
+	// NSString *columns;
+	
+	NSMutableArray<PGSQLConnection*>* dbConnectionList;
+	NSMutableArray<dispatch_block_t>* dbBlockTasks;
+	
+	dispatch_group_t dbQueryGroup;
 	
     struct FtpFile {
         const char *filename;
         FILE *stream;
     };
-    
-    
-    // make an objective-c class instead
-    /*
-    struct NSFtp {
-        NSString *filename;
-        NSFileHandle *handle;
-        NSView *dialog;
-    };
-     */
-    
 }
 
 -(id)init;
@@ -48,14 +44,17 @@ NS_ASSUME_NONNULL_BEGIN
 //-(NSArray *)listFilesMatching:(NSString *)s;
 -(NSArray *)listFiles;
 -(NSArray *)listColumns;
--(void)setDBServer:(NSInteger)i;
+// -(void)setDBServer:(NSInteger)i;
 
-- (NSString *)durationFormatter:(NSString *)frameString;
-- (NSString *)timeFormatter:(NSString *)timeString;
+- (void)updateColumns;
+- (void)updateFiles;
+
++ (NSString *)durationFormatter:(NSString *)frameString;
++ (NSString *)timeFormatter:(NSString *)timeString;
 
 // -(void)setFtpServer:(NSInteger)i;
-//-(BOOL)getFileName:(NSString *)name;
-//-(BOOL)getFileName:(NSString *)name target:(NSString *)target;
+// -(BOOL)getFileName:(NSString *)name;
+// -(BOOL)getFileName:(NSString *)name target:(NSString *)target;
 // -(BOOL)getFileName:(NSString *)name handle:(NSFileHandle *)local;
 
 @end
