@@ -25,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D221B1C26AFE8FF004C1D2D /* CifsDoctor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CifsDoctor.h; path = mHarris/CifsDoctor.h; sourceTree = "<group>"; };
+		4D221B1D26AFE8FF004C1D2D /* CifsDoctor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CifsDoctor.m; path = mHarris/CifsDoctor.m; sourceTree = "<group>"; };
 		4D23207125D799A5002F27C3 /* mHarris.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = mHarris.app; path = DerivedData/mHarris/Build/Products/Release/mHarris.app; sourceTree = "<group>"; };
 		4D23207725D79F92002F27C3 /* mHarris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mHarris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D9C7A5E25D7D60900A35963 /* PGSQLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PGSQLKit.framework; path = ../../../../../Library/Frameworks/PGSQLKit.framework; sourceTree = "<group>"; };
@@ -115,6 +117,8 @@
 				922E8E7421BE509300552383 /* SearchController.m */,
 				92C2CF2821B8D3CC00EABD49 /* Assets.xcassets */,
 				92C2CF2A21B8D3CC00EABD49 /* Main.storyboard */,
+				4D221B1C26AFE8FF004C1D2D /* CifsDoctor.h */,
+				4D221B1D26AFE8FF004C1D2D /* CifsDoctor.m */,
 				922E8E7921BF6E3600552383 /* PreviewController.h */,
 				922E8E7A21BF6E3600552383 /* PreviewController.m */,
 				922F5F4D21B8D464001FC1FF /* BrowseActionListener.h */,

@@ -49,7 +49,9 @@
 
     harris = [ad harris];
     defaults = [ad defaults];
-    
+	
+	//[harris updateColumns];
+
     /*
     if ([[searchResults arrangedObjects] count]==0)
         [self refresh:nil];
@@ -85,6 +87,8 @@
 
 - (void)updateColumnNames:(NSNotification*)n
 {
+	NSLog(@">>> [SearchController updateColumnNames]");
+
 	NSArray<NSString*>* names = [n object];
 	
 	for (NSString *s in names)
@@ -107,12 +111,17 @@
 	}
 	
 	// call update search?
-	
+	// [harris updateFiles];
 }
 
 - (void)updateSearchResults:(NSNotification*)n
 {
+	NSLog(@">>> [SearchController updateSearchResults]");
+	
 	NSArray<NSArray*>* results = [n object];
+	
+	NSLog(@"[SearchController updateSearchResults:count %lu]",[results count]);
+	NSLog(@"[SearchController column:count %lu]",[[results firstObject] count]);
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressInit" object:results];
 	
@@ -137,23 +146,29 @@
 
 - (void)initProgress:(NSNotification*)n
 {
+	NSLog(@">>> [SearchController initProgress]");
+
 	NSArray* res = [n object];
 	
-	// move to properties
 	[self->searchProgress setHidden:NO];
 	[self->searchProgress setUsesThreadedAnimation:YES];
 	[self->searchProgress setIndeterminate:YES];
 	[self->searchProgress startAnimation:nil];
+	
 	[self->refreshButton setEnabled:NO];
 	
-	[self->searchProgress stopAnimation:nil];
-	[self->searchProgress setIndeterminate:NO];
+
 	[self->searchProgress setDoubleValue:0];
 	[self->searchProgress setMaxValue:[res count]];
 }
 
 - (void)updateProgress:(NSNotification*)n
 {
+	// NSLog(@">>> [SearchController updateProgress]");
+
+	[self->searchProgress stopAnimation:nil];
+	[self->searchProgress setIndeterminate:NO];
+	
 	NSDictionary* value = [n object];
 	[self->searchTableView reloadData];
 	[self->searchResults addObject:value];
@@ -163,6 +178,8 @@
 
 - (void)stopProgress:(NSNotification*)n
 {
+	NSLog(@">>> [SearchController stopProgress]");
+
 	[self->searchProgress setHidden:YES];
 	[self->searchProgress stopAnimation:nil];
 	[self->refreshButton setEnabled:YES];
@@ -170,20 +187,24 @@
 
 - (IBAction)refresh:(id)sender {
 
+	NSLog(@">>> [SearchController refresh]");
 	// NSArray<NSString *> *colNames = [harris listColumns];
 
-		if ([[searchResults arrangedObjects] count]>0)
-        {
-            //NSLog(@"erasing old data");
-        	// erase old data
-            NSRange range= NSMakeRange(0,[[searchResults arrangedObjects] count]);
-            [searchResults removeObjectsAtArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
-			
-			[harris updateFiles];
-		} else {
-			// NSLog(@"creating columns");
-			[harris updateColumns];
-		}
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressInit" object:nil];
+	[harris updateColumns];
+	
+	if ([[searchResults arrangedObjects] count]>0)
+	{
+		//NSLog(@"erasing old data");
+		// erase old data
+		NSRange range= NSMakeRange(0,[[searchResults arrangedObjects] count]);
+		[searchResults removeObjectsAtArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
+	}
+	[harris updateFiles];
+//		} else {
+//			// NSLog(@"creating columns");
+//			[harris updateColumns];
+//		}
 }
 
 - (IBAction)updateFilter:(id)sender {

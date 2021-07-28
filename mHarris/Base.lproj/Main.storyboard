@@ -344,6 +344,10 @@
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="ef4-OJ-Tk5"/>
+                                        <menuItem title="CIFS Doctor" id="An4-y2-dcl">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -1406,7 +1410,7 @@
                     </view>
                     <connections>
                         <outlet property="refreshButton" destination="0tb-wa-8Wk" id="FhF-q9-t4U"/>
-                        <outlet property="searchProgress" destination="4pf-8T-SxR" id="7jL-YY-bxq"/>
+                        <outlet property="searchProgress" destination="4pf-8T-SxR" id="aM0-FB-7pq"/>
                         <outlet property="searchResults" destination="32D-ve-Y3w" id="T32-sw-bv0"/>
                         <outlet property="searchTableView" destination="8kG-4k-7vm" id="SSU-qo-ITN"/>
                         <outlet property="searchText" destination="h8h-Q5-loH" id="Kh0-fb-YWB"/>

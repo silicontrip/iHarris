@@ -12,13 +12,22 @@
 
 -(id)init
 {
+	// NSLog(@">>> [Harris init]");
+	
 	self = [super init];
 	// defaults = [NSUserDefaults standardUserDefaults];
 	dbConnection = nil;
 
+	// columnSet = ATOMIC_FLAG_INIT;
+
+	atomic_flag_clear(&columnSet);
+	
 	// would like this to be user configurable somehow
 	//columns = @"longnameid,modifiedtimestamp,duration,codecname,username,videoformatstring";
 
+//	columnResultLock = [NSLock new];
+//	resultLock = [NSLock new];
+	
 	return self;
 }
 
@@ -42,6 +51,9 @@
 
 -(BOOL)openDb
 {
+	// NSLog(@">>> [Harris openDb]");
+
+	
 	// dbList = [defaults arrayForKey:@"DbIps"];
 	// [self setDBServer:0]; // needs to be configurable
 	// dbConnection = [[PGSQLConnection alloc] init];
@@ -62,12 +74,16 @@
 
 + (void)closeDbServer:(PGSQLConnection*)svr
 {
+	NSLog(@">>> [Harris closeDbServer]");
+
 	[svr close];
 	svr = nil;
 }
 
 - (void)closeDb
 {
+	NSLog(@">>> [Harris closeDb]");
+
     [dbConnection close];
   //  [dbConnection release];  // ARC handles this?
     dbConnection = nil;
@@ -75,6 +91,8 @@
 
 -(NSArray *)listColumns
 {
+	NSLog(@">>> [Harris listColumns]");
+
 	// as colums is just a comma seperated string
 	// couldn't this be optimised to just return an NSArray<NSString>
 	// NSArray* empty =
@@ -110,6 +128,8 @@
 
 - (NSArray *)executeQuery:(NSString *) query
 {
+	NSLog(@">>> [Harris executeQuery]");
+
 	// PGSQLConnection*
 	if (dbConnection == nil)
 		if (![self openDb])
@@ -122,12 +142,14 @@
 	return results;
 }
 
-+ (NSArray *)filesQuery:(NSString*)query connection:(PGSQLConnection*)dbConnection
++ (NSArray<NSDictionary*> *)filesQuery:(NSString*)query connection:(PGSQLConnection*)con
 {
-	PGSQLRecordset *rs = nil;
-	NSMutableArray<NSArray*> *results = [[NSMutableArray alloc] initWithCapacity:32];
+	NSLog(@">>> [Harris filesQuery]");
 
-	rs = (PGSQLRecordset*)[dbConnection open:query];
+	PGSQLRecordset *rs = nil;
+	NSMutableArray<NSDictionary*> *results = [[NSMutableArray alloc] initWithCapacity:32];
+
+	rs = (PGSQLRecordset*)[con open:query];
 
 	if (rs != nil)
 	{
@@ -136,9 +158,9 @@
 
 		while (![rs isEOF])
 		{
-			NSMutableArray<NSString*> *rowResults = [[NSMutableArray alloc] initWithCapacity:8];
-
-			for (long i =0; i< [col count]; i++)
+			//NSMutableArray<NSString*> *rowResults = [[NSMutableArray alloc] initWithCapacity:8];
+			NSMutableDictionary<NSString*,NSString*>* rowResults = [NSMutableDictionary dictionaryWithCapacity:6];
+			for (NSUInteger i =0; i< [col count]; i++)
 			{
 				NSString *field =[[rs fieldByIndex:i] asString];
 				// conditional field formatting.
@@ -153,10 +175,12 @@
                     //field = [Harris timeFormatter:field];
                 }
 				 */
-				[rowResults addObject:field] ;
+				//[rowResults addObject:field] ;
+				[rowResults setObject:field forKey:[[col objectAtIndex:i] name]];
 			}
 			[results addObject:[rowResults copy]];
 			[rs moveNext];
+			//NSLog(@"result %@",[rowResults firstObject]);
 		}
 
 	}
@@ -166,16 +190,19 @@
 
 -(NSArray *)listFiles
 {
+	NSLog(@">>> [Harris listFiles]");
+
 	NSUserDefaults* dd = [(AppDelegate*) [[NSApplication sharedApplication] delegate] defaults];
 
 	// copy of listFilesMatching but with different query.
-	NSString *query = [NSString stringWithFormat:@"select %@ FROM clips where umid!='' and not longnameid like 'MLT%%'",[dd stringForKey:@"DbColumes"]];
+	NSString *query = [NSString stringWithFormat:@"select %@ FROM clips where umid!='' and not longnameid like 'MLT%%'",[dd stringForKey:@"DbColumns"]];
 	return [self executeQuery:query];
 
 }
 
 + (NSArray*)columnQuery:(NSString*)qry connection:(PGSQLConnection*)con
 {
+	// NSLog(@">>> [Harris columnQuery]");
 
 	id<GenDBRecordset> rs = nil;
 	
@@ -194,6 +221,8 @@
 
 - (void)updateColumns
 {
+	NSLog(@">>> [Harris updateColumns]");
+
 	NSUserDefaults* dd = [(AppDelegate*) [[NSApplication sharedApplication] delegate] defaults];
 
 	NSString *query = [NSString stringWithFormat:@"select %@ FROM clips limit 1",[dd stringForKey:@"DbColumns"]];
@@ -202,27 +231,38 @@
 	dbConnectionList = [NSMutableArray arrayWithCapacity:[dbList count]];
 	dbBlockTasks = [NSMutableArray arrayWithCapacity:[dbList count]];
 
-	dbQueryGroup = dispatch_group_create();
+	//dbQueryGroup = dispatch_group_create();
 	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
 	for (NSString* svr in [dbList allValues])
 	{
-		PGSQLConnection *dbConnection = [Harris dbConnectionServer:svr user:[dd stringForKey:@"DbUsername"] password:[dd stringForKey:@"DbPassword"]];
-		if (dbConnection)
-		{
-			if ([dbConnection connect])
+		// NSLog(@"[Harris UpdateColumns svr:%@",svr);
+		dispatch_block_t bb = dispatch_block_create(DISPATCH_BLOCK_ASSIGN_CURRENT, ^{
+
+			PGSQLConnection *dbConnection = [Harris dbConnectionServer:svr user:[dd stringForKey:@"DbUsername"] password:[dd stringForKey:@"DbPassword"]];
+			//NSLog(@"[Harris UpdateColumns dbConnection");
+
+			if (dbConnection)
 			{
-				[dbConnectionList addObject:dbConnection];
+				//NSLog(@"[Harris UpdateColumns dispatch_block");
+
+				if ([dbConnection connect])
+				{
+					//[dbConnectionList addObject:dbConnection];
 				// could this be created outside the loop, or is the dbConnection assigned at creation time.
-				dispatch_block_t bb = dispatch_block_create(DISPATCH_BLOCK_ASSIGN_CURRENT, ^{
 					NSArray<NSString*>* results = [Harris columnQuery:query connection:dbConnection];
-					if (results)
+					if (results) {
+						[dbConnection close];
 						[self columnAsyncResults:results];
-				});
-				[dbBlockTasks addObject:bb];
-				dispatch_group_async(dbQueryGroup, aQueue, bb );
+					}
+					[dbConnection close];
+				}
+				//[self columnAsyncResults:nil];
 			}
-		}
+		});
+		[dbBlockTasks addObject:bb];
+				//dispatch_group_async(dbQueryGroup, aQueue, bb );
+		dispatch_async( aQueue, bb );
 		
 	}
 
@@ -230,18 +270,35 @@
 
 - (void) columnAsyncResults:(NSArray<NSString*>*)results
 {
-	for (dispatch_block_t bb in dbBlockTasks)
-		if (dispatch_block_testcancel(bb) == 0)
-			dispatch_block_cancel(bb);
+	NSLog(@">>> [Harris columnAsyncResults]");
 	
-	for (PGSQLConnection* pp in dbConnectionList)
-		[pp close];
+
+	if (!atomic_flag_test_and_set(&columnSet))
+	{
+		NSLog(@"%@",results);
+
+		for (dispatch_block_t bb in dbBlockTasks) {
+			//NSLog(@"[Harris columnAsyncResults:dispatch_block_testcancel]");
+			if (dispatch_block_testcancel(bb) == 0)
+			{
+				//NSLog(@"[Harris columnAsyncResults:dispatch_block_cancel]");
+				dispatch_block_cancel(bb);
+			}
+		}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisColumnsUpdate" object:results];
+		dispatch_async(dispatch_get_main_queue(),^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisColumnsUpdate" object:results];
+		});
+	//[columnResultLock unlock];
+	}
 }
 
 - (void) updateFiles
 {
+	NSLog(@">>> [Harris updateFiles]");
+
+	atomic_flag_clear(&resultSet);
+	
 	NSUserDefaults* dd = [(AppDelegate*) [[NSApplication sharedApplication] delegate] defaults];
 	
 	// NSString *query = [NSString stringWithFormat:@"select %@ FROM clips limit 1",[dd stringForKey:@"DbColumns"]];
@@ -252,42 +309,62 @@
 	dbConnectionList = [NSMutableArray arrayWithCapacity:[dbList count]];
 	dbBlockTasks = [NSMutableArray arrayWithCapacity:[dbList count]];
 	
-	dbQueryGroup = dispatch_group_create();
+	//dbQueryGroup = dispatch_group_create();
 	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	
 	for (NSString* svr in [dbList allValues])
 	{
-		PGSQLConnection *dbConnection = [Harris dbConnectionServer:svr user:[dd stringForKey:@"DbUsername"] password:[dd stringForKey:@"DbPassword"]];
-		if (dbConnection)
-		{
-			if ([dbConnection connect])
+		dispatch_block_t bb = dispatch_block_create(DISPATCH_BLOCK_ASSIGN_CURRENT, ^{
+			PGSQLConnection *dbConnection = [Harris dbConnectionServer:svr user:[dd stringForKey:@"DbUsername"] password:[dd stringForKey:@"DbPassword"]];
+			if (dbConnection)
 			{
-				[dbConnectionList addObject:dbConnection];
-				// could this be created outside the loop, or is the dbConnection assigned at creation time.
-				dispatch_block_t bb = dispatch_block_create(DISPATCH_BLOCK_ASSIGN_CURRENT, ^{
-					NSArray<NSString*>* results = [Harris filesQuery:query connection:dbConnection];
-					if (results)
-						[self filesAsyncResults:results];
-				});
-				[dbBlockTasks addObject:bb];
-				dispatch_group_async(dbQueryGroup, aQueue, bb );
+				if ([dbConnection connect])
+				{
+					//[dbConnectionList addObject:dbConnection];
+					// could this be created outside the loop, or is the dbConnection assigned at creation time.
+						NSArray<NSDictionary*>* results = [Harris filesQuery:query connection:dbConnection];
+						if (results)
+						{
+							[dbConnection close];
+							[self filesAsyncResults:results];
+						}
+					[dbConnection close];
+				}
 			}
-		}
+		});
+		[dbBlockTasks addObject:bb];
+		//dispatch_group_async(dbQueryGroup, aQueue, bb );
+		// NSLog(@"dispatch %@",svr);
+		dispatch_async( aQueue, bb );
 		
 	}
 }
 
-- (void)filesAsyncResults:(NSArray<NSString*>*)results
+- (void)filesAsyncResults:(NSArray<NSDictionary*>*)results
 {
-	for (dispatch_block_t bb in dbBlockTasks)
-		if (dispatch_block_testcancel(bb) == 0)
-			dispatch_block_cancel(bb);
+	NSLog(@">>> [Harris filesAsyncResults]");
 
-	for (PGSQLConnection* pp in dbConnectionList)
-		[pp close];
-
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisSearchUpdate" object:results];
-
+	if (!atomic_flag_test_and_set(&resultSet))
+	{
+		for (dispatch_block_t bb in dbBlockTasks)
+			if (dispatch_block_testcancel(bb) == 0)
+				dispatch_block_cancel(bb);
+		
+		dispatch_async(dispatch_get_main_queue(),^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressInit" object:results];
+		});
+		for (NSDictionary *row in results)
+		{
+			dispatch_async(dispatch_get_main_queue(),^{
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressUpdate" object:row];
+			});
+		}
+		dispatch_async(dispatch_get_main_queue(),^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressStop" object:nil];
+		});
+		
+		//[resultLock unlock];
+	}
 }
 
 // Probably class method ... maybe even in the search controller

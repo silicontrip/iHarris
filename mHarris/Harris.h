@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #include <curl/curl.h>
 #include <stdio.h>
-
+#include <stdatomic.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
     //NSArray<NSString *> *mgxList;
     //NSArray<NSString *> *dbList;
 
+	atomic_flag columnSet;
+	atomic_flag resultSet;
+	
     NSUserDefaults *defaults ;
     
 	//NSURL *ftpServer;
@@ -28,10 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 	PGSQLConnection *dbConnection;
 	// NSString *columns;
 	
+	//NSLock* columnResultLock;
+	//NSLock* resultLock;
+	
 	NSMutableArray<PGSQLConnection*>* dbConnectionList;
 	NSMutableArray<dispatch_block_t>* dbBlockTasks;
 	
-	dispatch_group_t dbQueryGroup;
+	// dispatch_group_t dbQueryGroup;
 	
     struct FtpFile {
         const char *filename;

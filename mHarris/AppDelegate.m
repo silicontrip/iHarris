@@ -20,7 +20,7 @@ NSFileHandle *logFile = nil;
 - (instancetype)init {
     self = [super init];
     
-    NSLog(@">>> [AppDelegate init]");
+    //NSLog(@">>> [AppDelegate init]");
 	
 	NSDictionary *mgxList = [ NSDictionary dictionaryWithObjectsAndKeys:@"10.35.131.146", @"MGX1", @"10.35.131.147", @"MGX2", nil];
 	NSDictionary *cifsList = [ NSDictionary dictionaryWithObjectsAndKeys:@"10.35.132.105", @"CIFS1", @"10.35.132.106", @"CIFS2", @"10.35.132.108", @"CIFS3", nil];
@@ -32,8 +32,8 @@ NSFileHandle *logFile = nil;
 								 @"iharris", @"MgxUsername",
 								 @"mgx", @"MgxPassword",
 								 cifsList, @"DbServers",
-								 @"GFXMAC01", @"DbUsername",
-								 @"GFXMAC01", @"DbPassword",
+								 @"postgress", @"DbUsername",
+								 @"nxdb", @"DbPassword",
 								 @"longnameid,modifiedtimestamp,duration,codecname,username,videoformatstring", @"DbColumns",
 								 @"AVAssetExportPreset1920x1080", @"SelectedTranscodeFormat",
 								 documentsDirectory, @"StillPath",
