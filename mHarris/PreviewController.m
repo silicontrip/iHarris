@@ -440,7 +440,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [newMovie writeToFile:path
                    withAttributes:savedMovieAttributes];
-     
+
             NSLog(@"qt movie save: %@\n", error);
 
             if (error == nil)
@@ -457,22 +457,21 @@
                 });
             }
         });
-        
+
     }
     else
     {
     [[[abstractPlayerView subviews] objectAtIndex:0] beginTrimmingWithCompletionHandler:^(AVPlayerViewTrimResult result) {
         if (result == AVPlayerViewTrimOKButton) {
             // user selected Trim button (AVPlayerViewTrimOKButton)
-            
+
             CMTime startTime = [self->playerItem reversePlaybackEndTime];
             CMTime endTime = [self->playerItem forwardPlaybackEndTime];
-            
+
             NSString *ext = @"mov";
             if ([[self->defaults stringForKey:@"selected format"] isEqualToString:@"AUDIO ONLY"])
                 ext = @"aiff";
-            
-            
+
             NSString *path = [NSString stringWithFormat:@"%@/%@_%lld_%lld.%@",[self->defaults stringForKey:@"default download path"],[self->defaults stringForKey:@"selected clip"],startTime.value,endTime.value,ext]; // needs some configurability
             NSURL *url = [NSURL fileURLWithPath:path];
             NSLog(@"export url: %@ with %@",url,[self->defaults stringForKey:@"transcode format"]);
@@ -481,14 +480,13 @@
             
             [exportSession setOutputFileType:AVFileTypeQuickTimeMovie];
             [exportSession setOutputURL:url];
-            
+
             CMTimeRange timeRange = CMTimeRangeFromTimeToTime(startTime, endTime);
             [exportSession setTimeRange:timeRange];
-            
             [exportSession exportAsynchronouslyWithCompletionHandler:^(void){
                 // might like to alert that the job is finished
-                dispatch_async(dispatch_get_main_queue(), ^{
 
+                dispatch_async(dispatch_get_main_queue(), ^{
                     NSAlert *alert = [[NSAlert alloc] init];
                     [alert setMessageText:@"Movie Exported"];
                     [alert setAlertStyle:NSInformationalAlertStyle];
@@ -496,7 +494,6 @@
                 });
                 NSLog(@"COMPLETE EXPORT");
             } ];
-            
         } else {
             // user selected Cancel button (AVPlayerViewTrimCancelButton)
         }
@@ -504,37 +501,6 @@
     }
 }
 
-- (IBAction)saveClipToLocal:(id)sender {
-  //  NSLog(@"[PreviewController saveClipToLocal:%@]",sender);
-    
-    NSString *source = [self getPosixStringforSelection];
-    //[NSString stringWithFormat:@"%@/%@.mov",[defaults stringForKey:@"default preview path"],[defaults stringForKey:@"selected clip"]];
-    
-    NSString *ext = @"mov";
-    if ([[defaults stringForKey:@"selected format"] isEqualToString:@"AUDIO ONLY"])
-         ext = @"aiff";
-         
-    NSString *destination = [NSString stringWithFormat:@"%@/%@.%@",[defaults stringForKey:@"default download path"],[defaults stringForKey:@"selected clip"],ext];
-    
-    NSURL *srcUrl = [NSURL fileURLWithPath:source];  // this constructor can take a posix path
-    NSURL *destUrl = [NSURL fileURLWithPath:destination];
-    
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-    BOOL res=NO;
-    NSError *copyError = nil;
-   // NSLog(@"copy from: %@ to %@",source,destUrl);
-    if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
-        res=[[NSFileManager defaultManager] copyItemAtURL:srcUrl toURL:destUrl error:&copyError];
-    
-    if ((res==NO) && (copyError != nil))
-        [[NSAlert alertWithError:copyError] runModal];
-    
-    // NSLog(@"<<< saveClipToLocal %d\n",res);
-    });
-    
-}
 
 - (double)compareQTTime:(QTTime)q1 with:(QTTime)q2
 {
@@ -641,46 +607,18 @@
     [[[self view] window] makeFirstResponder:abstractPlayerView];
 }
 
-- (IBAction)importPremiere:(id)sender {
-    NSLog(@"[PreviewController importPremiere:%@]",sender);
-
-    NSAppleEventDescriptor *ppro = [NSAppleEventDescriptor descriptorWithDescriptorType:typeApplSignature bytes:"orPP" length:4];
-    NSURL *urlPath =  [NSURL fileURLWithPath:[self getPosixStringforSelection]];
-    
-    NSAppleEventDescriptor *file = [NSAppleEventDescriptor descriptorWithFileURL:urlPath];
-    NSAppleEventDescriptor *open = [NSAppleEventDescriptor appleEventWithEventClass:'aevt'
-                                                                            eventID:'odoc'
-                                                                   targetDescriptor:ppro
-                                                                           returnID:kAutoGenerateReturnID
-                                                                      transactionID:kAnyTransactionID];
-    
-    NSAppleEventDescriptor *activate = [NSAppleEventDescriptor appleEventWithEventClass:'misc'
-                                                                                eventID:'actv'
-                                                                       targetDescriptor:ppro
-                                                                               returnID:kAutoGenerateReturnID
-                                                                          transactionID:kAnyTransactionID];
-    
-    [open setParamDescriptor:file forKeyword:'----'];
-
-   // NSLog(@"aevent: %@",open);
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-        AEDesc res;
-        OSErr err;
-        
-      if (  ( err = AESendMessage([activate aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout))!= noErr)
-        {
-            NSLog(@"sending activate message to premiere error: %d",err);
-        }
-    
-    
-        if ( (err = AESendMessage([open aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout)) != noErr)
-        {
-            NSLog(@"sending activate message to premiere error: %d",err);
-        }
-    });
-    
+- (IBAction)importPremiere:(id)sender
+{
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+	[ad importPremiere:sender];
 }
+
+- (IBAction)saveClipToLocal:(id)sender {
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+	[ad saveToLocal:sender];
+
+}
+
 
 - (AVPlayerItem *)getPlayerItem {
    // NSLog(@"[PreviewController getPlayerItem]");

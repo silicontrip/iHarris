@@ -14,18 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HarrisPrefsController : NSViewController
 {
-
-	// NSUserDefaults *defaults;
-//	NSArrayController* _formatController;
 	NSArray<NSString*>* _availableFormats;
 }
 
-//@property (strong,nonatomic,readwrite) NSArrayController* formatController;
-//@property (strong,nonatomic,readwrite) NSMutableArray<NSString*>* availableFormats;
-//@property (strong,nonatomic,readwrite) NSArray<NSString*>* test;
-
+- (id)init;
 - (void)viewDidLoad;
 
+- (NSArray*)availableFormats;
+- (void)setAvailableFormats:(NSArray*)a;
 
 @end
 

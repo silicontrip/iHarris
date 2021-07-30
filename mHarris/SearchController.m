@@ -8,13 +8,12 @@
 
 #import "SearchController.h"
 
-@interface SearchController ()
-
-@end
-
 @implementation SearchController
 
-- (void)viewDidLoad {
+@synthesize selectionSet;
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do view setup here.
     
@@ -23,6 +22,8 @@
     AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     
     // user settings
+
+/*
     columnWidthDefaults = @{
                             @"longnameid": @250,
                             @"modifiedtimestamp": @150,
@@ -31,48 +32,111 @@
                             @"username":@150,
                             @"videoformatstring":@100
                             };
-    
+*/
    // [searchTableView setDraggingDestinationFeedbackStyle:(NSTableViewDraggingDestinationFeedbackStyle)]
-    
-    [searchTableView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
-    
+
+	[searchTableView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
+
   //  id pb = [NSPasteboard pasteboardWithName:@"NSFilenamesPboardType"];
   //  [searchTableView registerForDraggedTypes:[NSArray arrayWithObject:(NSString*)kUTTypeFileURL]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateColumnNames:) name:@"HarrisColumnsUpdate" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSearchResults:) name:@"HarrisSearchUpdate" object:nil];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:@"HarrisProgressUpdate" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initProgress:) name:@"HarrisProgressInit" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopProgress:) name:@"HarrisProgressStop" object:nil];
 
 	//[dc addObserver:self selector:@selector(textDidEndEditing:) name:@"NSControlTextDidEndEditingNotification" object:[w outlineAtIndex:0]];
 
-    harris = [ad harris];
-    defaults = [ad defaults];
+	harris = [ad harris];
+	defaults = [ad defaults];
 	
-	//[harris updateColumns];
-
-    /*
-    if ([[searchResults arrangedObjects] count]==0)
-        [self refresh:nil];
-     */
 }
 
-- (IBAction)selectSearch:(id)sender {
-	NSTableView *searchTable = (NSTableView *)sender;
-	// NSLog(@"selectSearch: row %ld\n",[searchTable selectedRow]);
+// - (void)initViewHeaderMenu:(id)view {
 	
-    if ([searchTable selectedRow] >= 0)
-    {
-        // show me the row,
+- (void)initTableColumnNames
+{
+	//create our contextual menu
+	NSMenu *menu = [cifsColumns menu];
+	
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+	NSDictionary<NSString*,NSNumber*>* columnVisible = [[ad defaults] dictionaryForKey:@"ColumnNames"];
+	
+	//loop through columns, creating a menu item for each
+	for (NSTableColumn *col in [searchTableView tableColumns]) {
 
-        NSArray* searchArranged = [searchResults arrangedObjects];
-
-        NSDictionary *row = [searchArranged objectAtIndex:[searchTable selectedRow]];
-        [defaults setObject:[row objectForKey:@"longnameid"] forKey:@"selected clip"];
-        [defaults setObject:[row objectForKey:@"videoformatstring"] forKey:@"selected format"];
-
+		NSString* columnTitle = [col.headerCell stringValue];
+		bool vis = [[columnVisible objectForKey:columnTitle] boolValue];
+		if ([columnTitle isEqualToString:@"longnameid"])
+			vis = YES;
+		
+		[col setHidden:!vis];
+		
+		NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:columnTitle
+													action:@selector(toggleColumn:)  keyEquivalent:@""];
+		mi.target = self;
+		mi.representedObject = col;
+		mi.state = vis?NSOnState:NSOffState;
+		[menu addItem:mi];
 	}
+	return;
+}
+
+- (void)toggleColumn:(id)sender
+{
+	// get user defaults
+	
+	NSLog(@">>> [SearchController toggleColumn:]");
+	
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+
+	NSMutableDictionary<NSString*,NSNumber*>* defaultColumns = [NSMutableDictionary dictionaryWithDictionary:[[ad defaults] dictionaryForKey:@"ColumnNames"]];
+	if (!defaultColumns)
+		defaultColumns = [NSMutableDictionary dictionaryWithCapacity:32];
+	NSMenuItem* mi = (NSMenuItem*)sender;
+	NSLog(@"[SearchController toggleColumnName:%@]",[mi title]);
+	// defaults column name
+	NSNumber* columnVisible = [defaultColumns objectForKey:[mi title]];
+	NSLog(@"[SearchController toggleColumnNumber:%@",columnVisible);
+	// if defaults[columnname]==true
+	bool newVis = NO;
+	NSTableColumn *col = [sender representedObject];
+
+	if (![columnVisible boolValue])
+	{
+		NSLog(@"[SearchController toggleColumnVisible:YES]");
+
+		[col setHidden:NO];
+		mi.state = NSOnState;
+		newVis = YES;
+	} else {
+		NSLog(@"[SearchController toggleColumnVisible:NO]");
+
+		[col setHidden:YES];
+		mi.state = NSOffState;
+		newVis = NO;
+	}
+	// set user defaults...
+	[defaultColumns setValue:@(newVis) forKey:[mi title]];
+	[[ad defaults] setObject:[defaultColumns copy] forKey:@"ColumnNames"];
+}
+
+- (IBAction)selectSearch:(id)sender
+{
+	
+	NSTableView *searchTable = (NSTableView *)sender;
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+
+	NSLog(@">>> [SearchController selectSearchNSIndexSet:%@",searchTable.selectedRowIndexes);
+	
+	//NSLog(@"selectSearch: row %ld\n",[searchTable selectedRow]);
+
+	ad.selectedRowIndexes = searchTable.selectedRowIndexes;
+	ad.searchResults = searchResults;
+	
+	//NSLog(@"%@",searchContent);
 }
 
 /*
@@ -82,24 +146,31 @@
 }
 */
 
-- (IBAction)beginDrag:(id)sender { ; }
+- (IBAction)beginDrag:(id)sender {
+	NSLog(@"Drag, drag, drag, drag is the bag!");
+	;
+	
+}
 
 
 - (void)updateColumnNames:(NSNotification*)n
 {
-	NSLog(@">>> [SearchController updateColumnNames]");
+	//NSLog(@">>> [SearchController updateColumnNames]");
 
 	NSArray<NSString*>* names = [n object];
+
+	//NSDictionary<NSString*,NSNumber*>columnVis = [[ad defaults] dictionaryForKey:@""];
 	
 	for (NSString *s in names)
 	{
-		NSTableColumn *col = [[NSTableColumn alloc] initWithIdentifier:[NSString stringWithFormat:@"%@",s]];
+		NSTableColumn *col = [[NSTableColumn alloc] initWithIdentifier:s];
 		[col setEditable:NO];
 		
 		// this is such horrible code
 		// want to push this out to preferences.
 		
-		[col setWidth:[[columnWidthDefaults objectForKey:s] doubleValue]];
+		//[col setWidth:[[columnWidthDefaults objectForKey:s] doubleValue]];
+		[col setWidth:150];
 		[col setMinWidth:10]; // or something
 		[[col headerCell] setStringValue:s];
 		[col bind:@"value"
@@ -110,6 +181,8 @@
 		[searchTableView addTableColumn:col];
 	}
 	
+	[self initTableColumnNames];
+	
 	// call update search?
 	// [harris updateFiles];
 }
@@ -118,27 +191,16 @@
 {
 	NSLog(@">>> [SearchController updateSearchResults]");
 	
-	NSArray<NSArray*>* results = [n object];
+	NSArray<NSDictionary*>* results = [n object];
 	
 	NSLog(@"[SearchController updateSearchResults:count %lu]",[results count]);
 	NSLog(@"[SearchController column:count %lu]",[[results firstObject] count]);
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressInit" object:results];
 	
-	for (NSArray *row in results)
+	for (NSDictionary *row in results)
 	{
-		// NSMutableDictionary *value = [[NSMutableDictionary alloc] init];
-		NSDictionary *value;
-		for (NSUInteger colNum=0; colNum < [row count]; ++colNum)
-		{
-			NSString* colData = [row objectAtIndex:colNum];
-			// NSLog(@"Populating column: %lu: %@",colNum,colData);
-			value = [NSDictionary dictionaryWithObjectsAndKeys:colData,[NSString stringWithFormat:@"%@",[colNames objectAtIndex:colNum]],nil];
-			
-			//[value setObject:colData forKey:[NSString stringWithFormat:@"%@",[colNames objectAtIndex:colNum]]];
-			//colNum++;
-		}
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressUpdate" object:value];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressUpdate" object:row];
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressStop" object:nil];
 }
@@ -146,9 +208,11 @@
 
 - (void)initProgress:(NSNotification*)n
 {
-	NSLog(@">>> [SearchController initProgress]");
 
 	NSArray* res = [n object];
+	
+	//NSLog(@">>> [SearchController initProgress:%lu]",[res count]);
+
 	
 	[self->searchProgress setHidden:NO];
 	[self->searchProgress setUsesThreadedAnimation:YES];
@@ -157,7 +221,6 @@
 	
 	[self->refreshButton setEnabled:NO];
 	
-
 	[self->searchProgress setDoubleValue:0];
 	[self->searchProgress setMaxValue:[res count]];
 }
@@ -178,7 +241,7 @@
 
 - (void)stopProgress:(NSNotification*)n
 {
-	NSLog(@">>> [SearchController stopProgress]");
+	// NSLog(@">>> [SearchController stopProgress]");
 
 	[self->searchProgress setHidden:YES];
 	[self->searchProgress stopAnimation:nil];
@@ -187,7 +250,7 @@
 
 - (IBAction)refresh:(id)sender {
 
-	NSLog(@">>> [SearchController refresh]");
+	//NSLog(@">>> [SearchController refresh]");
 	// NSArray<NSString *> *colNames = [harris listColumns];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressInit" object:nil];
@@ -201,10 +264,7 @@
 		[searchResults removeObjectsAtArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
 	}
 	[harris updateFiles];
-//		} else {
-//			// NSLog(@"creating columns");
-//			[harris updateColumns];
-//		}
+
 }
 
 - (IBAction)updateFilter:(id)sender {
@@ -220,4 +280,20 @@
 	}
 }
 
+- (IBAction)saveToLocal:(id)sender
+{
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+
+	NSLog(@"[SearchController saveToLocal:]");
+	
+	[ad saveToLocal:sender];
+	
+}
+
+- (IBAction)importPremiere:(id)sender
+{
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+	[ad importPremiere:sender];
+}
+	
 @end

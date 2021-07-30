@@ -13,19 +13,30 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-   // NSUserDefaults *defaults;
-    Harris *harris;
-    IBOutlet NSMenuItem *saveMenu;
-    IBOutlet NSWindowController *mainWindow;
-    
-    // log file
-    
+	// NSUserDefaults *defaults;
+	Harris *harris;
+	IBOutlet NSMenuItem *saveMenu;
+	IBOutlet NSWindowController *mainWindow;
+
+	// log file
+	
+	NSArray<NSString*>* allColumns;
+	// IBOutlet NSIndexSet *selectedRowIndexes;
+	
+	NSArray<NSDictionary<NSString*,NSString*>*>* data;
 }
 
-- (Harris *)harris;
-//- (NSUserDefaults *)getDefaults;
-- (NSUserDefaults *)defaults;
+@property (readonly,getter=defaults) NSUserDefaults* defaults;
+@property (readonly,getter=harris) Harris* harris;
+@property (strong) NSIndexSet *selectedRowIndexes;
+@property (strong) NSArrayController *searchResults;
+
+// - (Harris *)harris;
+// - (NSUserDefaults *)getDefaults;
+// - (NSUserDefaults *)defaults;
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag;
+- (void)saveToLocal:(id)sender;
+- (IBAction)importPremiere:(id)sender;
 
 @end
 

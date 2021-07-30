@@ -74,6 +74,19 @@
                                                 <action selector="saveDocumentAs:" target="Ady-hI-5gd" id="mDf-zr-I0C"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kEc-e8-3ks"/>
+                                        <menuItem title="Publish Clip" id="70F-D8-FIs">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <segue destination="q08-3f-dtc" kind="show" id="LCa-Fp-vuh"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Download Clip" id="1ci-fa-Wb9">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <segue destination="yLw-bc-TOF" kind="show" id="hpD-uT-nFJ"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -365,7 +378,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-363" y="294"/>
+            <point key="canvasLocation" x="-1373" y="-259"/>
         </scene>
         <!--Harris Prefs Controller-->
         <scene sceneID="IgA-Rz-u1K">
@@ -386,7 +399,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhT-sk-Dod" customClass="NSSeg">
+                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhT-sk-Dod">
                                         <rect key="frame" x="0.0" y="591" width="580" height="100"/>
                                         <clipView key="contentView" id="oX3-SZ-91e">
                                             <rect key="frame" x="1" y="0.0" width="578" height="99"/>
@@ -1010,16 +1023,16 @@
                     </connections>
                 </dictionaryController>
             </objects>
-            <point key="canvasLocation" x="-650" y="874"/>
+            <point key="canvasLocation" x="-690" y="368"/>
         </scene>
         <!--mHarris-->
         <scene sceneID="wxK-lB-EYK">
             <objects>
+                <customObject id="4ft-fp-VrT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <tabViewController title="mHarris" showSeguePresentationStyle="single" selectedTabViewItemIndex="0" id="Xq0-6Q-ftd" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="Yry-So-NBg"/>
                         <tabViewItem id="MEf-Ao-f77"/>
-                        <tabViewItem id="uk9-Me-Ull"/>
                     </tabViewItems>
                     <tabView key="tabView" misplaced="YES" type="noTabsNoBorder" id="1gE-PV-qjf">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="300"/>
@@ -1030,26 +1043,23 @@
                         </connections>
                     </tabView>
                     <connections>
-                        <outlet property="tabView" destination="1gE-PV-qjf" id="U26-IE-jW9"/>
                         <segue destination="Wha-Pd-pqD" kind="relationship" relationship="tabItems" id="Uk3-aJ-yIH"/>
                         <segue destination="IPw-m3-XmX" kind="relationship" relationship="tabItems" id="mVZ-Br-6df"/>
-                        <segue destination="q08-3f-dtc" kind="relationship" relationship="tabItems" id="h2z-qZ-NbH"/>
                     </connections>
                 </tabViewController>
-                <customObject id="4ft-fp-VrT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="110" y="666"/>
+            <point key="canvasLocation" x="220" y="-457"/>
         </scene>
         <!--Download-->
         <scene sceneID="1eJ-SE-6O6">
             <objects>
                 <viewController title="Download" id="yLw-bc-TOF" customClass="DownloadController" sceneMemberID="viewController">
                     <view key="view" id="JFh-d8-3Ix">
-                        <rect key="frame" x="0.0" y="0.0" width="1050" height="318"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1050" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView autoresizesSubviews="NO" distribution="equalSpacing" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" horizontalHuggingPriority="1" verticalHuggingPriority="1" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tav-OT-zUa" userLabel="Download Stack">
-                                <rect key="frame" x="8" y="200" width="1034" height="110"/>
+                                <rect key="frame" x="8" y="182" width="1034" height="110"/>
                                 <subviews>
                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4KE-9D-c1s" userLabel="Clip Stack">
                                         <rect key="frame" x="0.0" y="88" width="1034" height="22"/>
@@ -1213,7 +1223,7 @@
                 <customObject id="Jc5-Ym-4S2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="J1m-jG-bev"/>
             </objects>
-            <point key="canvasLocation" x="358" y="-332"/>
+            <point key="canvasLocation" x="-1390" y="154"/>
         </scene>
         <!--Publish-->
         <scene sceneID="UF3-oj-EEB">
@@ -1306,21 +1316,21 @@
                 </viewController>
                 <customObject id="CTG-W9-8ha" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025.5" y="576"/>
+            <point key="canvasLocation" x="-2208" y="145"/>
         </scene>
         <!--Search-->
         <scene sceneID="GuV-iH-i9v">
             <objects>
                 <viewController title="Search" id="Wha-Pd-pqD" customClass="SearchController" sceneMemberID="viewController">
                     <view key="view" id="xDt-DN-2C1">
-                        <rect key="frame" x="0.0" y="0.0" width="554" height="379"/>
+                        <rect key="frame" x="0.0" y="0.0" width="554" height="455"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="equalSpacing" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0K4-Jb-OAD" userLabel="Search Stack">
-                                <rect key="frame" x="8" y="8" width="538" height="363"/>
+                                <rect key="frame" x="8" y="8" width="538" height="439"/>
                                 <subviews>
-                                    <stackView autoresizesSubviews="NO" distribution="equalSpacing" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUV-CR-EXm">
-                                        <rect key="frame" x="0.0" y="341" width="538" height="22"/>
+                                    <stackView autoresizesSubviews="NO" distribution="equalSpacing" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUV-CR-EXm">
+                                        <rect key="frame" x="0.0" y="417" width="538" height="22"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UKq-Rr-hhn">
                                                 <rect key="frame" x="0.0" y="0.0" width="431" height="22"/>
@@ -1344,7 +1354,7 @@
                                                 </buttonCell>
                                             </button>
                                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="4pf-8T-SxR">
-                                                <rect key="frame" x="522" y="6" width="16" height="16"/>
+                                                <rect key="frame" x="522" y="3" width="16" height="16"/>
                                             </progressIndicator>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1359,19 +1369,20 @@
                                         </customSpacing>
                                     </stackView>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rlO-2I-297">
-                                        <rect key="frame" x="0.0" y="0.0" width="538" height="262"/>
+                                        <rect key="frame" x="0.0" y="88" width="538" height="262"/>
                                         <clipView key="contentView" id="KcZ-K7-G3T">
                                             <rect key="frame" x="1" y="0.0" width="536" height="261"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="t4g-iT-RsR" id="8kG-4k-7vm">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveName="mHarris" headerView="t4g-iT-RsR" id="8kG-4k-7vm">
                                                     <rect key="frame" x="0.0" y="0.0" width="536" height="238"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <tableViewGridLines key="gridStyleMask" vertical="YES"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
-                                                        <action selector="selectSearch:" target="Wha-Pd-pqD" id="qvG-oz-CvE"/>
+                                                        <action selector="selectSearch:" target="Wha-Pd-pqD" id="Ibx-ng-KNv"/>
                                                     </connections>
                                                 </tableView>
                                             </subviews>
@@ -1388,14 +1399,49 @@
                                         <tableHeaderView key="headerView" id="t4g-iT-RsR">
                                             <rect key="frame" x="0.0" y="0.0" width="536" height="23"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <connections>
+                                                <outlet property="menu" destination="twy-Y3-4Sq" id="6rE-xd-Yvy"/>
+                                            </connections>
                                         </tableHeaderView>
                                     </scrollView>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYT-dx-yWD">
+                                        <rect key="frame" x="121" y="0.0" width="296" height="21"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jj4-MG-K8h">
+                                                <rect key="frame" x="-6" y="-7" width="148" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Save Clip to Local" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Bwc-YM-djd">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="saveToLocal:" target="Wha-Pd-pqD" id="nTs-CV-m0j"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N8x-os-R3s">
+                                                <rect key="frame" x="138" y="-7" width="164" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Import into Premiere" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ju7-t6-0G3">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -1409,18 +1455,20 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="refreshButton" destination="0tb-wa-8Wk" id="FhF-q9-t4U"/>
+                        <outlet property="cifsColumns" destination="t4g-iT-RsR" id="Dth-IY-eDg"/>
+                        <outlet property="refreshButton" destination="0tb-wa-8Wk" id="rPy-6M-YE3"/>
                         <outlet property="searchProgress" destination="4pf-8T-SxR" id="aM0-FB-7pq"/>
-                        <outlet property="searchResults" destination="32D-ve-Y3w" id="T32-sw-bv0"/>
+                        <outlet property="searchResults" destination="32D-ve-Y3w" id="Jmf-sF-fIl"/>
                         <outlet property="searchTableView" destination="8kG-4k-7vm" id="SSU-qo-ITN"/>
-                        <outlet property="searchText" destination="h8h-Q5-loH" id="Kh0-fb-YWB"/>
                     </connections>
                 </viewController>
                 <customObject id="dpf-g1-rLg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="5uz-3N-zqo"/>
+                <menu id="twy-Y3-4Sq"/>
                 <arrayController editable="NO" id="32D-ve-Y3w" userLabel="searchResults"/>
+                <userDefaultsController id="nk4-GU-7vF"/>
             </objects>
-            <point key="canvasLocation" x="874" y="982.5"/>
+            <point key="canvasLocation" x="-77" y="232"/>
         </scene>
         <!--Preview-->
         <scene sceneID="prC-gR-mIx">
@@ -1647,7 +1695,7 @@
                 </viewController>
                 <customObject id="N9J-XO-169" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="924" y="99"/>
+            <point key="canvasLocation" x="535" y="210.5"/>
         </scene>
     </scenes>
     <resources>

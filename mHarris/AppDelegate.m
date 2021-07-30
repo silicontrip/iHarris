@@ -14,6 +14,10 @@
 
 @implementation AppDelegate
 
+// application state...
+@synthesize selectedRowIndexes;
+@synthesize searchResults;
+
 NSFileHandle *logFile = nil;
 
 
@@ -55,11 +59,12 @@ NSFileHandle *logFile = nil;
 
 }
 
+/*
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application
     
 }
-
+*/
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 	// Insert code here to tear down your application
@@ -82,5 +87,118 @@ NSFileHandle *logFile = nil;
     return YES;
     // return !flag;
 }
+
+- (void)saveToLocal:(id)sender
+{
+
+	NSArray* paths = [self posixPathsForSelection];
+	
+	for (NSString* source in paths)
+	{
+		NSURL* srcUrl = [NSURL fileURLWithPath:source];
+		NSString* filename = [[srcUrl pathComponents] lastObject];
+		NSLog(@"path comp: %@",filename);
+		NSString* destination = [self.defaults stringForKey:@"DownloadPath"];
+		NSURL *destUrl = [NSURL fileURLWithPath:destination];
+
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+			BOOL res=NO;
+			NSError *copyError = nil;
+			// NSLog(@"copy from: %@ to %@",source,destUrl);
+			if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+				res=[[NSFileManager defaultManager] copyItemAtURL:srcUrl toURL:destUrl error:&copyError];
+			
+			if ((res==NO) && (copyError != nil))
+				[[NSAlert alertWithError:copyError] runModal];
+			
+			// NSLog(@"<<< saveClipToLocal %d\n",res);
+		});
+		
+	}
+	
+	
+}
+
+- (NSArray<NSString *>*) posixPathsForSelection
+{
+
+	NSArray* results = [searchResults arrangedObjects];
+	
+	NSMutableArray<NSString *>*paths = [NSMutableArray arrayWithCapacity:[results count]];
+	NSArray* sel = [results objectsAtIndexes:selectedRowIndexes];
+	
+	for (NSDictionary* row in sel)
+	{
+		NSString* path;
+		if ([[row objectForKey:@"videoformatstring"] isEqualToString:@"AUDIO ONLY"])
+		{
+			path = [NSString stringWithFormat:@"%@/%@/%@.%@",
+				[self.defaults stringForKey:@"PreviewPath"],
+				@"AIFF",
+				[row objectForKey:@"longnameid"],
+				@"aiff"];
+		} else {
+			path = [NSString stringWithFormat:@"%@/%@/%@.%@",
+				[self.defaults stringForKey:@"PreviewPath"],
+				@"MOV",
+				[row objectForKey:@"longnameid"],
+				@"mov"];
+		}
+		
+		[paths addObject:path];
+		
+	}
+	return [paths copy];
+	
+}
+
+- (IBAction)importPremiere:(id)sender
+{
+	// NSLog(@"[PreviewController importPremiere:%@]",sender);
+	
+	NSAppleEventDescriptor *ppro = [NSAppleEventDescriptor descriptorWithDescriptorType:typeApplSignature bytes:"orPP" length:4];
+	
+	
+	for (NSString* source in [self posixPathsForSelection])
+	{
+	
+		NSURL *urlPath =  [NSURL fileURLWithPath:source];
+	
+		NSAppleEventDescriptor *file = [NSAppleEventDescriptor descriptorWithFileURL:urlPath];
+		NSAppleEventDescriptor *open = [NSAppleEventDescriptor appleEventWithEventClass:'aevt'
+																			eventID:'odoc'
+																   targetDescriptor:ppro
+																		   returnID:kAutoGenerateReturnID
+																	  transactionID:kAnyTransactionID];
+	
+		NSAppleEventDescriptor *activate = [NSAppleEventDescriptor appleEventWithEventClass:'misc'
+																				eventID:'actv'
+																	   targetDescriptor:ppro
+																			   returnID:kAutoGenerateReturnID
+																		  transactionID:kAnyTransactionID];
+	
+		[open setParamDescriptor:file forKeyword:'----'];
+	
+	// NSLog(@"aevent: %@",open);
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		
+			AEDesc res;
+			OSErr err;
+		
+			if (  ( err = AESendMessage([activate aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout))!= noErr)
+			{
+			NSLog(@"sending activate message to premiere error: %d",err);
+			}
+		
+		
+			if ( (err = AESendMessage([open aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout)) != noErr)
+			{
+				NSLog(@"sending activate message to premiere error: %d",err);
+			}
+		});
+	}
+	
+}
+
 
 @end

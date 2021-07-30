@@ -22,17 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 	atomic_flag columnSet;
 	atomic_flag resultSet;
-	
-    NSUserDefaults *defaults ;
-    
+
+	NSUserDefaults *defaults ;
+
 	//NSURL *ftpServer;
 	//NSString *dbServer;
 
 	PGSQLConnection *dbConnection;
-	// NSString *columns;
-	
-	//NSLock* columnResultLock;
-	//NSLock* resultLock;
 	
 	NSMutableArray<PGSQLConnection*>* dbConnectionList;
 	NSMutableArray<dispatch_block_t>* dbBlockTasks;
@@ -45,16 +41,16 @@ NS_ASSUME_NONNULL_BEGIN
     };
 }
 
--(id)init;
--(BOOL)openDb;
-//-(NSArray *)listFilesMatching:(NSString *)s;
--(NSArray *)listFiles;
--(NSArray *)listColumns;
-// -(void)setDBServer:(NSInteger)i;
-
+- (id)init;
 - (void)updateColumns;
 - (void)updateFiles;
 
+- (void)columnAsyncResults:(NSArray<NSString*>*)results;
+- (void)filesAsyncResults:(NSArray<NSDictionary*>*)results;
+
++ (NSArray<NSDictionary*> *)dbQuery:(NSString*)query connection:(PGSQLConnection*)con;
+
+// I keep seeing Value Transformer mentioned in the bindings settings of the NSTableView...
 + (NSString *)durationFormatter:(NSString *)frameString;
 + (NSString *)timeFormatter:(NSString *)timeString;
 

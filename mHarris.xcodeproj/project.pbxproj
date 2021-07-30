@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -171,7 +171,7 @@
 				};
 			};
 			buildConfigurationList = 92C2CF1721B8D3CA00EABD49 /* Build configuration list for PBXProject "mHarris" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -253,7 +253,10 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				"HEADER_SEARCH_PATHS[arch=*]" = /Library/Frameworks/QTKit.framework/Versions/A/Headers;
 				INFOPLIST_FILE = mHarris/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -284,7 +287,10 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				"HEADER_SEARCH_PATHS[arch=*]" = /Library/Frameworks/QTKit.framework/Versions/A/Headers;
 				INFOPLIST_FILE = mHarris/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nine.gtv.mHarris;
