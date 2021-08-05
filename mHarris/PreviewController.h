@@ -40,8 +40,10 @@
     IBOutlet NSButton *trimButton;
     IBOutlet NSView *abstractPlayerView;
     NSView *mpView;
-    
-    NSUserDefaults *defaults;
+	
+	NSString * selectedFormat;
+	NSString * selectedClip;
+    // NSUserDefaults *defaults;
     Harris *harris;
 }
 
@@ -52,8 +54,6 @@
 - (NSString *)stringFromValue:(long long)value timescale:(long long)ts;
 - (NSString *)stringFromCMTime:(CMTime)time;
 - (NSString *)stringFromQTTime:(QTTime)time;
-
-- (NSString *)getPosixStringforSelection;
 
 - (void)updateQTMovieTime:(NSNotification *)notification;
 - (QTMovieView *)qtPlayerViewFor:(NSURL *)url;

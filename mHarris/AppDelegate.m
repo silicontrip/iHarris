@@ -29,20 +29,20 @@ NSFileHandle *logFile = nil;
 	NSDictionary *mgxList = [ NSDictionary dictionaryWithObjectsAndKeys:@"10.35.131.146", @"MGX1", @"10.35.131.147", @"MGX2", nil];
 	NSDictionary *cifsList = [ NSDictionary dictionaryWithObjectsAndKeys:@"10.35.132.105", @"CIFS1", @"10.35.132.106", @"CIFS2", @"10.35.132.108", @"CIFS3", nil];
 
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+	NSString *downloadDir = [paths objectAtIndex:0];
 
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:mgxList, @"MgxServers",
-								 @"iharris", @"MgxUsername",
+								 @"mgx", @"MgxUsername",
 								 @"mgx", @"MgxPassword",
 								 cifsList, @"DbServers",
-								 @"postgress", @"DbUsername",
+								 @"postgres", @"DbUsername",
 								 @"nxdb", @"DbPassword",
 								// @"longnameid,modifiedtimestamp,duration,codecname,username,videoformatstring", @"DbColumns",
 								 @"AVAssetExportPreset1920x1080", @"SelectedTranscodeFormat",
-								 documentsDirectory, @"StillPath",
+								 @"'/Volumes/Media/NEWS/DAILY_NEWS/'yyyy 'NEWS'/MM MMMM/yyMMdd/'captures'", @"StillPath",
 								 @"/Volumes/NEXIO1", @"PreviewPath",
-								 documentsDirectory, @"DownloadPath",
+								 downloadDir, @"DownloadPath",
 								 nil];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
@@ -95,26 +95,29 @@ NSFileHandle *logFile = nil;
 	
 	for (NSString* source in paths)
 	{
-		NSLog(@"Copy from: %@",source);
+		//NSLog(@"Copy from: %@",source);
 		NSURL* srcUrl = [NSURL fileURLWithPath:source];
 		NSString* filename = [source lastPathComponent];
 		// NSLog(@"path comp: %@",filename);
 		NSString* destinationDir = [self.defaults stringForKey:@"DownloadPath"];
-		NSLog(@"Copy to: %@",destinationDir);
+		//NSLog(@"Copy to: %@",destinationDir);
 		NSString* destination = [NSString pathWithComponents:@[destinationDir,filename]];
 		
 		NSURL *destUrl = [NSURL fileURLWithPath:destination];
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-			BOOL res=NO;
-			NSError *copyError = nil;
-			// NSLog(@"copy from: %@ to %@",source,destUrl);
-			if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+			NSLog(@"copy from: %@ to %@",srcUrl,destUrl);
+			if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] ) {
+				NSError *copyError = nil;
+				BOOL res=NO;
+
+				NSLog(@"begin copy");
 				res=[[NSFileManager defaultManager] copyItemAtURL:srcUrl toURL:destUrl error:&copyError];
-			
-			if ((res==NO) && (copyError != nil)) {
-				dispatch_async(dispatch_get_main_queue(), ^{
-					[[NSAlert alertWithError:copyError] runModal];
-				});
+				NSLog(@"success: %d. error: %@",res,copyError);
+				if ((res==NO) && (copyError != nil)) {
+					dispatch_async(dispatch_get_main_queue(), ^{
+						[[NSAlert alertWithError:copyError] runModal];
+					});
+				}
 			}
 			// NSLog(@"<<< saveClipToLocal %d\n",res);
 		});
@@ -122,6 +125,18 @@ NSFileHandle *logFile = nil;
 	}
 	
 	
+}
+
+- (NSDictionary<NSString*,NSString*>*) firstSelectedRow
+{
+	NSArray* results = [searchResults arrangedObjects];
+	return [[results objectsAtIndexes:selectedRowIndexes] firstObject];
+
+}
+
+- (NSString*) firstPosixSelection
+{
+	return [[self posixPathsForSelection] firstObject];
 }
 
 - (NSArray<NSString *>*) posixPathsForSelection
@@ -157,34 +172,44 @@ NSFileHandle *logFile = nil;
 	
 }
 
+
+// Premiere has to be open for this to work.
 - (IBAction)importPremiere:(id)sender
 {
-	// NSLog(@"[PreviewController importPremiere:%@]",sender);
+//	NSLog(@"[AppDelegate importPremiere:%@]",sender);
 	
 	NSAppleEventDescriptor *ppro = [NSAppleEventDescriptor descriptorWithDescriptorType:typeApplSignature bytes:"orPP" length:4];
 	
+//	NSLog(@"app sig: %@",ppro);
 	
 	for (NSString* source in [self posixPathsForSelection])
 	{
 	
 		NSURL *urlPath =  [NSURL fileURLWithPath:source];
 	
+//		NSLog(@"importing: %@",urlPath);
+		
 		NSAppleEventDescriptor *file = [NSAppleEventDescriptor descriptorWithFileURL:urlPath];
+//		NSLog(@"file: %@",file);
+
 		NSAppleEventDescriptor *open = [NSAppleEventDescriptor appleEventWithEventClass:'aevt'
 																			eventID:'odoc'
 																   targetDescriptor:ppro
 																		   returnID:kAutoGenerateReturnID
 																	  transactionID:kAnyTransactionID];
-	
+//		NSLog(@"open: %@",open);
+
 		NSAppleEventDescriptor *activate = [NSAppleEventDescriptor appleEventWithEventClass:'misc'
 																				eventID:'actv'
 																	   targetDescriptor:ppro
 																			   returnID:kAutoGenerateReturnID
 																		  transactionID:kAnyTransactionID];
-	
+//		NSLog(@"activate: %@",activate);
+
 		[open setParamDescriptor:file forKeyword:'----'];
 	
-	// NSLog(@"aevent: %@",open);
+//	NSLog(@"open: %@",open);
+		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 			AEDesc res;
@@ -192,7 +217,7 @@ NSFileHandle *logFile = nil;
 		
 			if (  ( err = AESendMessage([activate aeDesc], &res, kAEWaitReply|kAENeverInteract, kAEDefaultTimeout))!= noErr)
 			{
-			NSLog(@"sending activate message to premiere error: %d",err);
+				NSLog(@"sending activate message to premiere error: %d",err);
 			}
 		
 		

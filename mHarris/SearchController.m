@@ -55,7 +55,7 @@
 }
 
 // - (void)initViewHeaderMenu:(id)view {
-	
+
 - (void)initTableColumnNames
 {
 	//create our contextual menu
@@ -64,8 +64,14 @@
 	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
 	NSDictionary<NSString*,NSNumber*>* columnVisible = [[ad defaults] dictionaryForKey:@"ColumnNames"];
 	
+	NSArray<NSTableColumn*>* unsorted = [searchTableView tableColumns];
+	
+	NSArray *colSort;
+	colSort = [unsorted sortedArrayUsingComparator:^NSComparisonResult(NSTableColumn *a, NSTableColumn *b) {
+		return [[a.headerCell stringValue] compare:[b.headerCell stringValue]];
+	}];
 	//loop through columns, creating a menu item for each
-	for (NSTableColumn *col in [searchTableView tableColumns]) {
+	for (NSTableColumn *col in colSort) {
 
 		NSString* columnTitle = [col.headerCell stringValue];
 		bool vis = [[columnVisible objectForKey:columnTitle] boolValue];
@@ -96,23 +102,23 @@
 	if (!defaultColumns)
 		defaultColumns = [NSMutableDictionary dictionaryWithCapacity:32];
 	NSMenuItem* mi = (NSMenuItem*)sender;
-	NSLog(@"[SearchController toggleColumnName:%@]",[mi title]);
+	// NSLog(@"[SearchController toggleColumnName:%@]",[mi title]);
 	// defaults column name
 	NSNumber* columnVisible = [defaultColumns objectForKey:[mi title]];
-	NSLog(@"[SearchController toggleColumnNumber:%@",columnVisible);
+	// NSLog(@"[SearchController toggleColumnNumber:%@",columnVisible);
 	// if defaults[columnname]==true
 	bool newVis = NO;
 	NSTableColumn *col = [sender representedObject];
 
 	if (![columnVisible boolValue])
 	{
-		NSLog(@"[SearchController toggleColumnVisible:YES]");
+		//NSLog(@"[SearchController toggleColumnVisible:YES]");
 
 		[col setHidden:NO];
 		mi.state = NSOnState;
 		newVis = YES;
 	} else {
-		NSLog(@"[SearchController toggleColumnVisible:NO]");
+		// NSLog(@"[SearchController toggleColumnVisible:NO]");
 
 		[col setHidden:YES];
 		mi.state = NSOffState;
@@ -193,8 +199,8 @@
 	
 	NSArray<NSDictionary*>* results = [n object];
 	
-	NSLog(@"[SearchController updateSearchResults:count %lu]",[results count]);
-	NSLog(@"[SearchController column:count %lu]",[[results firstObject] count]);
+	// NSLog(@"[SearchController updateSearchResults:count %lu]",[results count]);
+	// NSLog(@"[SearchController column:count %lu]",[[results firstObject] count]);
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"HarrisProgressInit" object:results];
 	
@@ -268,23 +274,28 @@
 }
 
 - (IBAction)updateFilter:(id)sender {
-	// NSSearchField *search = sender;
-	//  NSLog(@"update filter: %@", [search stringValue]);
+	NSString *search = [sender stringValue];
+	// NSLog(@"update filter: %@", search );
 
-	if ([[sender stringValue] length] == 0)
+	if ([search length] == 0)
 		[searchResults setFilterPredicate:nil];
 	else
 	{
-		NSPredicate *filt = [NSPredicate predicateWithFormat:@"longnameid CONTAINS[cd] %@",[sender stringValue]];
+		[searchResults setFilterPredicate:nil];
+
+		NSPredicate *filt = [NSPredicate predicateWithFormat:@"longnameid LIKE[cd] %@",search];
+		// NSLog(@"New Pred: %@",filt);
 		[searchResults setFilterPredicate:filt];
 	}
 }
 
+
+// wonder if I can remove this and have it fall through to NextResponder.
 - (IBAction)saveToLocal:(id)sender
 {
 	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
 
-	NSLog(@"[SearchController saveToLocal:]");
+	//NSLog(@"[SearchController saveToLocal:]");
 	
 	[ad saveToLocal:sender];
 	
@@ -293,6 +304,9 @@
 - (IBAction)importPremiere:(id)sender
 {
 	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+	
+	NSLog(@"[SearchController importPremiere:]");
+	
 	[ad importPremiere:sender];
 }
 	

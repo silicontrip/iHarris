@@ -55,8 +55,8 @@
     NSString *path = [[downloadDirText title] stringByAppendingString:@"/"];
     path = [path stringByAppendingString:download];
     
-    NSLog(@"download path: %@\n",path);
-    NSLog(@"clip name: %@\n",download);
+   // NSLog(@"download path: %@\n",path);
+   // NSLog(@"clip name: %@\n",download);
     //NSLog(@"clip format: %@\n",[formatText title]);
     
     // fork this...

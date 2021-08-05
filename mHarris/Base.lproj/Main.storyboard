@@ -1382,6 +1382,9 @@
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="importPremiere:" target="Wha-Pd-pqD" id="vjq-OH-t2X"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <visibilityPriorities>

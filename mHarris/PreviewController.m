@@ -20,10 +20,11 @@
 	// NSLog(@"[PreviewController viewDidLoad]");
 
 	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-	defaults = [ad defaults];
+	// defaults = [ad defaults];
 	harris = [ad harris];
 	acceptsFirstResponder = YES;
 }
+
 - (void)viewDidAppear {
    // NSLog(@"[PreviewController viewDidAppear]");
     
@@ -44,17 +45,24 @@
     // XDCAM EX
     // XDCAM HD
     // XDCAM HD422
-    
-    NSString *format = [defaults stringForKey:@"selected format"];
-    NSURL *url = [NSURL fileURLWithPath:[self getPosixStringforSelection]];
-    
-    
+	
+	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+
+	NSDictionary<NSString*,NSString*>* row = [ad firstSelectedRow];
+	
+	selectedFormat = [row objectForKey:@"videoformatstring"];
+	selectedClip = [row objectForKey:@"longnameid"];
+	
+    NSURL *url = [NSURL fileURLWithPath:[ad firstPosixSelection]];
+	
+	//NSLog(@"selected format: %@",selectedFormat);
+	
     // all the conditions
     
-    if ([format isEqualToString:@"AUDIO ONLY"] ||
-        [format isEqualToString:@"XDCAM EX"] ||
-        [format isEqualToString:@"XDCAM HD"] ||
-        [format isEqualToString:@"XDCAM HD422"])
+    if ([selectedFormat isEqualToString:@"AUDIO ONLY"] ||
+        [selectedFormat isEqualToString:@"XDCAM EX"] ||
+        [selectedFormat isEqualToString:@"XDCAM HD"] ||
+        [selectedFormat isEqualToString:@"XDCAM HD422"])
     {
         mpView =[self avPlayerViewFor:url];
         [mpView setFrame:[abstractPlayerView bounds]];
@@ -64,7 +72,7 @@
        [[[self view] window] makeFirstResponder:mpView];
         //[vp setNextResponder:abstractPlayerView];
 
-    } else {
+    } else if ([selectedFormat isEqualToString:@"IMX"]){
         
         mpView  = [self qtPlayerViewFor:url];
         [mpView setFrame:[abstractPlayerView bounds]];
@@ -77,7 +85,9 @@
        // [vp setNextResponder:abstractPlayerView];
         //[[[self view] window] makeFirstResponder:abstractPlayerView];
 
-    }
+	} else {
+		NSLog(@"Preview Controller: unknown format \"%@\"",selectedFormat);
+	}
     
     
     [abstractPlayerView setNeedsDisplay:YES];
@@ -105,7 +115,7 @@
         switch (status) {
             case AVPlayerItemStatusReadyToPlay:
                 // Ready to Play
-                NSLog(@"Ready to play...");
+               // NSLog(@"Ready to play...");
                 [playerItem addOutput:playerOutput];
                 
                 break;
@@ -131,6 +141,8 @@
         [qtMovie invalidate];
         qtMovie=nil;
     }
+	selectedFormat = nil;
+	selectedClip = nil;
     for (NSView *ns in [abstractPlayerView subviews])
         [ns removeFromSuperview];
     
@@ -168,19 +180,23 @@
     return [self stringFromValue:time.timeValue timescale:time.timeScale];
 }
 
+/*
 - (NSString *) getPosixStringforSelection
 {
    // NSLog(@"[PreviewController getPosixStringforSelection]");
 
+	NSUserDefaults* defaults = [(AppDelegate *)[[NSApplication sharedApplication] delegate] defaults];
+	
         NSString *ext = @"mov";
         NSString *folder = @"MOV";
-        if ([[defaults stringForKey:@"selected format"] isEqualToString:@"AUDIO ONLY"])
+        if ([selectedFormat isEqualToString:@"AUDIO ONLY"])
         {
             folder = @"AIFF";
             ext = @"aiff";
         }
         return [NSString stringWithFormat:@"%@/%@/%@.%@",[defaults stringForKey:@"default preview path"],folder,[defaults stringForKey:@"selected clip"],ext];
 }
+*/
 
 - (void)updateQTMovieTime:(NSNotification *)notification
 {
@@ -316,7 +332,7 @@
 
                         free(buffer);
                     }
-                    NSLog(@"sbuf: %@", sBuf);
+                    // NSLog(@"sbuf: %@", sBuf);
                 }
                 if (sBuf)
                     CFRelease(sBuf);
@@ -353,6 +369,9 @@
     NSError *writeError = nil;
     CVPixelBufferRef buffer;
     NSString *filename;
+	
+	NSUserDefaults* defaults = [(AppDelegate *)[[NSApplication sharedApplication] delegate] defaults];
+	
     if (isQTMovie)
     {
         
@@ -369,13 +388,13 @@
         buffer = (CVPixelBufferRef)[qtMovie frameImageAtTime:time
                                               withAttributes:dict error:NULL];
 
-        filename = [NSString stringWithFormat:@"%@/%@_%04lld.tif",[self datePath:[defaults stringForKey:@"default still path"]],[defaults stringForKey:@"selected clip"],time.timeValue];
+        filename = [NSString stringWithFormat:@"%@/%@_%04lld.tif",[self datePath:[defaults stringForKey:@"default still path"]],selectedClip,time.timeValue];
         
  
     } else {
         buffer = [playerOutput copyPixelBufferForItemTime:[playerItem currentTime] itemTimeForDisplay:nil];
         CMTime currentTime = [playerItem currentTime];
-        filename = [NSString stringWithFormat:@"%@/%@_%04lld.tif",[self datePath:[defaults stringForKey:@"default still path"]],[defaults stringForKey:@"selected clip"],currentTime.value];
+        filename = [NSString stringWithFormat:@"%@/%@_%04lld.tif",[self datePath:[defaults stringForKey:@"default still path"]],selectedClip,currentTime.value];
     }
         CIImage     *inputImage = nil;
 
@@ -418,7 +437,9 @@
 }
 
 - (IBAction)beginTrimming:(id)sender {
-    NSLog(@"[PreviewController beginTrimming:%@]",sender);
+   // NSLog(@"[PreviewController beginTrimming:%@]",sender);
+
+	NSUserDefaults* defaults = [(AppDelegate *)[[NSApplication sharedApplication] delegate] defaults];
 
     // maybe abstract the movieview another day
     
@@ -429,7 +450,7 @@
         
         QTTimeRange qtRange = QTMakeTimeRange(qtIn, qtDur);
         
-        NSString *path = [NSString stringWithFormat:@"%@/%@_%lld_%lld.mov",[defaults stringForKey:@"default download path"],[defaults stringForKey:@"selected clip"],qtIn.timeValue,qtOut.timeValue]; // needs some configurability
+		NSString *path = [NSString stringWithFormat:@"%@/%@_%lld_%lld.mov",[defaults stringForKey:@"default download path"],selectedClip,qtIn.timeValue,qtOut.timeValue]; // needs some configurability
         
         QTMovie *newMovie = [[QTMovie alloc] initWithMovie:qtMovie
                                                  timeRange:qtRange error:&error];
@@ -469,14 +490,17 @@
             CMTime endTime = [self->playerItem forwardPlaybackEndTime];
 
             NSString *ext = @"mov";
-            if ([[self->defaults stringForKey:@"selected format"] isEqualToString:@"AUDIO ONLY"])
+            if ([selectedFormat isEqualToString:@"AUDIO ONLY"])
                 ext = @"aiff";
 
-            NSString *path = [NSString stringWithFormat:@"%@/%@_%lld_%lld.%@",[self->defaults stringForKey:@"default download path"],[self->defaults stringForKey:@"selected clip"],startTime.value,endTime.value,ext]; // needs some configurability
+			NSString *dlPath = [defaults stringForKey:@"default download path"];
+			
+			
+            NSString *path = [NSString stringWithFormat:@"%@/%@_%lld_%lld.%@",dlPath,selectedClip,startTime.value,endTime.value,ext]; // needs some configurability
             NSURL *url = [NSURL fileURLWithPath:path];
-            NSLog(@"export url: %@ with %@",url,[self->defaults stringForKey:@"transcode format"]);
+            NSLog(@"export url: %@ with %@",url,[defaults stringForKey:@"transcode format"]);
             
-            AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:self->playerItem.asset presetName:[self->defaults stringForKey:@"transcode format"]];
+            AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:self->playerItem.asset presetName:[defaults stringForKey:@"transcode format"]];
             
             [exportSession setOutputFileType:AVFileTypeQuickTimeMovie];
             [exportSession setOutputURL:url];
@@ -492,7 +516,7 @@
                     [alert setAlertStyle:NSInformationalAlertStyle];
                     [alert runModal];
                 });
-                NSLog(@"COMPLETE EXPORT");
+               // NSLog(@"COMPLETE EXPORT");
             } ];
         } else {
             // user selected Cancel button (AVPlayerViewTrimCancelButton)
@@ -505,11 +529,11 @@
 - (double)compareQTTime:(QTTime)q1 with:(QTTime)q2
 {
     // check that both timescales != 0
-    NSLog(@"q1: %ld q2: %ld\n",q1.timeScale,q2.timeScale);
+   // NSLog(@"q1: %ld q2: %ld\n",q1.timeScale,q2.timeScale);
 
     double res = q1.timeValue / q1.timeScale - q2.timeValue / q2.timeScale;
     
-    NSLog(@"res: %f\n",res);
+  //  NSLog(@"res: %f\n",res);
 
     return res;
 }

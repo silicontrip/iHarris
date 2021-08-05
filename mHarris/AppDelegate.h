@@ -40,5 +40,10 @@
 - (void)saveToLocal:(id)sender;
 - (IBAction)importPremiere:(id)sender;
 
+- (NSDictionary<NSString*,NSString*>*) firstSelectedRow;
+- (NSString*) firstPosixSelection;
+- (NSArray<NSString *>*) posixPathsForSelection;
+
+
 @end
 
