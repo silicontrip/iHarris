@@ -38,7 +38,7 @@ NSFileHandle *logFile = nil;
 								 cifsList, @"DbServers",
 								 @"postgress", @"DbUsername",
 								 @"nxdb", @"DbPassword",
-								 @"longnameid,modifiedtimestamp,duration,codecname,username,videoformatstring", @"DbColumns",
+								// @"longnameid,modifiedtimestamp,duration,codecname,username,videoformatstring", @"DbColumns",
 								 @"AVAssetExportPreset1920x1080", @"SelectedTranscodeFormat",
 								 documentsDirectory, @"StillPath",
 								 @"/Volumes/NEXIO1", @"PreviewPath",
@@ -95,12 +95,15 @@ NSFileHandle *logFile = nil;
 	
 	for (NSString* source in paths)
 	{
+		NSLog(@"Copy from: %@",source);
 		NSURL* srcUrl = [NSURL fileURLWithPath:source];
-		NSString* filename = [[srcUrl pathComponents] lastObject];
-		NSLog(@"path comp: %@",filename);
-		NSString* destination = [self.defaults stringForKey:@"DownloadPath"];
+		NSString* filename = [source lastPathComponent];
+		// NSLog(@"path comp: %@",filename);
+		NSString* destinationDir = [self.defaults stringForKey:@"DownloadPath"];
+		NSLog(@"Copy to: %@",destinationDir);
+		NSString* destination = [NSString pathWithComponents:@[destinationDir,filename]];
+		
 		NSURL *destUrl = [NSURL fileURLWithPath:destination];
-
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 			BOOL res=NO;
 			NSError *copyError = nil;
@@ -108,9 +111,11 @@ NSFileHandle *logFile = nil;
 			if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
 				res=[[NSFileManager defaultManager] copyItemAtURL:srcUrl toURL:destUrl error:&copyError];
 			
-			if ((res==NO) && (copyError != nil))
-				[[NSAlert alertWithError:copyError] runModal];
-			
+			if ((res==NO) && (copyError != nil)) {
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[[NSAlert alertWithError:copyError] runModal];
+				});
+			}
 			// NSLog(@"<<< saveClipToLocal %d\n",res);
 		});
 		

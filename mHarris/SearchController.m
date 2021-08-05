@@ -129,7 +129,7 @@
 	NSTableView *searchTable = (NSTableView *)sender;
 	AppDelegate *ad = (AppDelegate *)[[NSApplication sharedApplication] delegate];
 
-	NSLog(@">>> [SearchController selectSearchNSIndexSet:%@",searchTable.selectedRowIndexes);
+	// NSLog(@">>> [SearchController selectSearchNSIndexSet:%@",searchTable.selectedRowIndexes);
 	
 	//NSLog(@"selectSearch: row %ld\n",[searchTable selectedRow]);
 

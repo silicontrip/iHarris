@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Harris.h"
+#include <copyfile.h>
+
 
 @class Harris;
 

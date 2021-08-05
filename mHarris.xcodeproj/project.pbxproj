@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0C894926BB8536008DCF77 /* PGSQLKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 4D9C7A5E25D7D60900A35963 /* PGSQLKit.framework */; };
+		4D0C894A26BB853E008DCF77 /* QTKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 4DC667F425D7A4630030A8C4 /* QTKit.framework */; };
 		4D221B1B26AFA137004C1D2D /* HarrisPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F5221B8D464001FC1FF /* HarrisPrefsController.m */; };
 		4D23208725D79FA0002F27C3 /* PublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922E8E7721BF4CBD00552383 /* PublishController.m */; };
 		4D23208825D79FD7002F27C3 /* DownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922F5F6321BE1CC2001FC1FF /* DownloadController.m */; };
@@ -193,6 +195,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D0C894A26BB853E008DCF77 /* QTKit.framework in Resources */,
+				4D0C894926BB8536008DCF77 /* PGSQLKit.framework in Resources */,
 				4D23209125D7A02B002F27C3 /* Assets.xcassets in Resources */,
 				4D23209025D7A028002F27C3 /* Main.storyboard in Resources */,
 			);

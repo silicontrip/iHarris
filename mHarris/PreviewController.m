@@ -517,17 +517,17 @@
 
 - (void)keyDown:(NSEvent *)event
 {
-    if (event != nil)
-    {
-  // NSLog(@"[PreviewController keyDown:%@]",event);
-    NSString *key = [event characters];
-    if ([key isEqualToString:@"i"])
-    {
-        if (isQTMovie)
-        {
-            qtIn = [qtMovie currentTime];
-            [self->inTimeCodeText setTitle:[self stringFromQTTime:qtIn]];
-            if (qtOut.timeScale == 0  || [self compareQTTime:qtIn with:qtOut] > 0)
+	if (event != nil)
+	{
+		// NSLog(@"[PreviewController keyDown:%@]",event);
+		NSString *key = [event characters];
+		if ([key isEqualToString:@"i"])
+		{
+			if (isQTMovie)
+			{
+				qtIn = [qtMovie currentTime];
+				[self->inTimeCodeText setTitle:[self stringFromQTTime:qtIn]];
+				if (qtOut.timeScale == 0  || [self compareQTTime:qtIn with:qtOut] > 0)
             {
                 qtOut = qtTotal;
             }
